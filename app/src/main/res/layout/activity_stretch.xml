@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/stretch_top_margin"
+    tools:context=".Activities.StretchActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/stretch_name_text_size"
+        android:id="@+id/tv_stretchName"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/tv_instructions"
+        android:layout_margin="@dimen/stretch_instructions_margin"
+        android:textSize="@dimen/stretch_instruction_text_size"
+        android:layout_below="@+id/tv_stretchName"/>
+
+    <ImageView
+        android:layout_width="@dimen/stretch_img_size"
+        android:layout_height="@dimen/stretch_img_size"
+        android:id="@+id/img_stretchPhoto"
+
+        android:layout_below="@+id/tv_instructions"
+        android:layout_margin="@dimen/stretch_img_margin"
+        android:layout_centerInParent="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/tv_timer"
+        android:layout_margin="@dimen/stretch_timer_margin"
+        android:textSize="@dimen/stretch_timer_text_size"
+        android:layout_above="@+id/ad_layout"/>
+
+    <include layout="@layout/ad_layout"></include>
+
+</RelativeLayout>

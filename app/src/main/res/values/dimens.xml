@@ -1,0 +1,26 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Stretch Routines Activity -->
+    <dimen name="subtitle_height">48dp</dimen>
+    <dimen name="listview_row_height">72dp</dimen>
+
+    <!-- routine item -->
+    <dimen name="routine_image_dimen">48dp</dimen>
+    <dimen name="routine_image_margin">10dp</dimen>
+    <dimen name="routine_text_size">20sp</dimen>
+    <dimen name="routine_text_margin_left">10dp</dimen>
+
+    <!-- Stretch Activity -->
+    <dimen name="stretch_top_margin">24dp</dimen>
+    <dimen name="stretch_instructions_margin">10dp</dimen>
+    <dimen name="stretch_img_margin">48dp</dimen>
+    <dimen name="stretch_timer_margin">16dp</dimen>
+
+    <dimen name="stretch_name_text_size">28sp</dimen>
+    <dimen name="stretch_instruction_text_size">20sp</dimen>
+    <dimen name="stretch_img_size">200dp</dimen>
+    <dimen name="stretch_timer_text_size">48sp</dimen>
+</resources>

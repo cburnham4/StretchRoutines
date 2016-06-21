@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.StretchActivity">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/stretching_photo250height"
+            android:id="@+id/img_frontImg"
+            android:scaleType="center" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:id="@+id/tv_orangeLine"
+            android:layout_below="@id/img_frontImg"
+            android:background="@color/orangeAccent"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/subtitle_height"
+            android:text="@string/select_stretch_routine"
+            android:background="@color/toolbarBackground"
+            android:gravity="center"
+            android:id="@+id/tv_selectStretch"
+            android:layout_below="@+id/tv_orangeLine"
+            />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tv_selectStretch"
+            android:layout_above="@+id/btnCreateCustom"
+            android:id="@+id/lv_routines"></ListView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/create_custom_routine"
+        android:id="@+id/btnCreateCustom"
+        android:layout_above="@+id/ad_layout"
+        android:background="@drawable/btn_background_border"
+        android:onClick="createRoutineOnClick"/>
+
+    <include layout="@layout/ad_layout"></include>
+
+
+</RelativeLayout>
+
