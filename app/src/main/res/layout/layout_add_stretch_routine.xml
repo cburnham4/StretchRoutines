@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <de.hdodenhof.circleimageview.CircleImageView
+
+            android:layout_width="@dimen/routine_image_dimen"
+            android:layout_height="@dimen/routine_image_dimen"
+            android:layout_margin="@dimen/routine_image_margin"
+
+            app:civ_border_width="2dp"
+            app:civ_border_color="@color/colorPrimary"
+            android:id="@+id/img_routine"
+            android:src="@drawable/man_doing_pushups"
+            android:layout_centerVertical="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/stretch_name"
+            android:id="@+id/etStretchName"
+            android:layout_gravity="bottom"
+            android:padding="@dimen/edit_name_padding"
+            />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/duration"
+            android:layout_gravity="bottom"
+            android:inputType="number"
+            android:id="@+id/etStretchDuration"
+            android:padding="@dimen/edit_name_padding"
+            />
+    </LinearLayout>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etStretchDescription"
+        android:hint="@string/description"
+        />
+
+</LinearLayout>

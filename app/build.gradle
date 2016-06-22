@@ -26,6 +26,7 @@ dependencies {
     compile 'com.android.support:design:24.0.0'
 
     compile 'de.hdodenhof:circleimageview:2.0.0'
+    compile 'com.google.android:flexbox:0.2.2'
 
     compile 'com.google.android.gms:play-services-ads:9.0.2'
     compile 'com.amazon.android:mobile-ads:5.7.2'
