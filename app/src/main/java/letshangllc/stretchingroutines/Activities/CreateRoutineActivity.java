@@ -9,13 +9,17 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
+import letshangllc.stretchingroutines.JavaObjects.Stretch;
 import letshangllc.stretchingroutines.R;
 import letshangllc.stretchingroutines.dialogs.AddStretchDialog;
 
 public class CreateRoutineActivity extends AppCompatActivity {
     private static final String TAG = CreateRoutineActivity.class.getSimpleName();
+
+    private ArrayList<Stretch> stretches;
 
     /* ListView for the stretches */
     private ListView lvStretches;
@@ -38,9 +42,12 @@ public class CreateRoutineActivity extends AppCompatActivity {
         addStretchDialog.setCallback(new AddStretchDialog.Listener() {
             @Override
             public void onDialogPositiveClick(String name, int duration, String description) {
-
+                Stretch stretch = new Stretch(name, description, 0, duration);
+                stretches.add(stretch);
             }
         });
+
+        addStretchDialog.show(getSupportFragmentManager(), TAG);
     }
 
 

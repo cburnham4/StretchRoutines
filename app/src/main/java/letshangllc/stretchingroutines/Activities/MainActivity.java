@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ import letshangllc.stretchingroutines.AdsHelper;
 import letshangllc.stretchingroutines.Data.Routines;
 import letshangllc.stretchingroutines.R;
 import letshangllc.stretchingroutines.JavaObjects.RoutineItem;
-import letshangllc.stretchingroutines.RoutineListAdapter;
+import letshangllc.stretchingroutines.adapaters.RoutineListAdapter;
 
 public class MainActivity extends AppCompatActivity {
     private String TAG = MainActivity.class.getSimpleName();
