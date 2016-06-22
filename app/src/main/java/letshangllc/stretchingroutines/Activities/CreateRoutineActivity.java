@@ -14,6 +14,7 @@ import java.util.Locale;
 
 import letshangllc.stretchingroutines.JavaObjects.Stretch;
 import letshangllc.stretchingroutines.R;
+import letshangllc.stretchingroutines.adapaters.StretchesAdapter;
 import letshangllc.stretchingroutines.dialogs.AddStretchDialog;
 
 public class CreateRoutineActivity extends AppCompatActivity {
@@ -23,17 +24,29 @@ public class CreateRoutineActivity extends AppCompatActivity {
 
     /* ListView for the stretches */
     private ListView lvStretches;
+
+    /* ListView Adapter*/
+    private StretchesAdapter stretchesAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_routine);
-        setupViews();
+
+        this.getExistingData();
+        this.setupViews();
+    }
+
+    public void getExistingData(){
+        stretches =  new ArrayList<>();
+
     }
 
     public void setupViews(){
         lvStretches = (ListView) findViewById(R.id.lvStretches);
 
+        stretchesAdapter  = new StretchesAdapter(this, stretches);
 
+        lvStretches.setAdapter(stretchesAdapter);
     }
 
     public void addStretchOnClick(View view){

@@ -11,7 +11,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import letshangllc.stretchingroutines.JavaObjects.RoutineItem;
 import letshangllc.stretchingroutines.JavaObjects.Stretch;
 import letshangllc.stretchingroutines.R;
 
@@ -21,12 +20,14 @@ import letshangllc.stretchingroutines.R;
 public class StretchesAdapter extends ArrayAdapter<Stretch> {
 
     private static class ViewHolder {
-        CircleImageView routineImg;
-        TextView routineName;
+        CircleImageView stretchImg;
+        TextView tvName;
+        TextView tvDuration;
+        TextView tvInstruction;
     }
 
     public StretchesAdapter(Context context, ArrayList<Stretch> stretches){
-        super(context, R.something, stretches);
+        super(context, R.layout.item_stretch, stretches);
     }
 
     @Override
@@ -38,17 +39,21 @@ public class StretchesAdapter extends ArrayAdapter<Stretch> {
         if (convertView == null) {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.item_routine, parent, false);
-            viewHolder.routineImg = (CircleImageView) convertView.findViewById(R.id.img_routine);
-            viewHolder.routineName = (TextView) convertView.findViewById(R.id.tv_routine);
+            convertView = inflater.inflate(R.layout.item_stretch, parent, false);
+            viewHolder.stretchImg = (CircleImageView) convertView.findViewById(R.id.img_stretch);
+            viewHolder.tvName = (TextView) convertView.findViewById(R.id.tvStretchName);
+            viewHolder.tvDuration = (TextView) convertView.findViewById(R.id.tvStretchDuration);
+            viewHolder.tvInstruction = (TextView) convertView.findViewById(R.id.tvStretchInstruction);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         // Populate the data into the template view using the data object
 
-        viewHolder.routineImg.setImageDrawable(ContextCompat.getDrawable(getContext(), item.getRoutineIconIndex()));
-        viewHolder.routineName.setText(item.getName());
+        viewHolder.stretchImg.setImageDrawable(ContextCompat.getDrawable(getContext(), item.getDrawableIndex()));
+        viewHolder.tvName.setText(item.getName());
+        viewHolder.tvDuration.setText(item.getTime());
+        viewHolder.tvInstruction.setText(item.getInstructions());
 
 
         // Return the completed view to render on screen
