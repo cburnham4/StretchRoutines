@@ -42,6 +42,7 @@ public class StretchesDBHelper extends SQLiteOpenHelper {
         //if(checkDataBase()){
         db.execSQL(STRETCHES_TABLE_CREATE);
         db.execSQL(ROUTINE_TABLE_CREATE);
+        db.execSQL(ROUTINE_STRETCH_TABLE_CREATE);
         //
     }
     @Override
