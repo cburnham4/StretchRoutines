@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="@dimen/stretch_item_height">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="@dimen/routine_image_dimen"
         android:layout_height="@dimen/routine_image_dimen"
-        android:layout_margin="@dimen/routine_image_margin"
+        android:padding="@dimen/routine_image_margin"
         app:civ_border_width="2dp"
         app:civ_border_color="@color/colorPrimary"
         android:id="@+id/img_stretch"
@@ -18,17 +17,27 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/text_padding_left_item"
         android:layout_toRightOf="@+id/img_stretch">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tvStretchName"/>
+            android:id="@+id/tvStretchName"
+            android:textSize="@dimen/stretch_name_txtsz"
+            android:textColor="@color/black"
+            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tvStretchInstruction"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textSize="@dimen/stretch_instructor_txtsz"
+            android:paddingRight="@dimen/text_padding_left_item"
             />
 
     </LinearLayout>

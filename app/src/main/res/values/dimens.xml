@@ -30,4 +30,12 @@
     <dimen name="dialog_margin">24dp</dimen>
     <dimen name="dialog_title_size">20sp</dimen>
     <dimen name="dialog_margin_between_items">20dp</dimen>
+
+    <!-- Stretch item -->
+    <dimen name="stretch_name_top_margin">8dp</dimen>
+    <dimen name="stretch_name_txtsz">16sp</dimen>
+    <dimen name="stretch_instructor_txtsz">14sp</dimen>
+    <dimen name="text_padding_left_item">16dp</dimen>
+    <dimen name="text_padding_top_bottom_item">20dp</dimen>
+    <dimen name="stretch_item_height">72dp</dimen>
 </resources>
