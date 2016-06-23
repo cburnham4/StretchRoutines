@@ -1,6 +1,9 @@
 package letshangllc.stretchingroutines.Activities;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,10 +15,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import letshangllc.stretchingroutines.AdsHelper;
+import letshangllc.stretchingroutines.Data.DBTableConstants;
 import letshangllc.stretchingroutines.Data.Routines;
+import letshangllc.stretchingroutines.Data.StretchesDBHelper;
 import letshangllc.stretchingroutines.R;
 import letshangllc.stretchingroutines.JavaObjects.RoutineItem;
 import letshangllc.stretchingroutines.adapaters.RoutineListAdapter;
+import letshangllc.stretchingroutines.helpers.DbBitmapUtility;
 
 public class MainActivity extends AppCompatActivity {
     private String TAG = MainActivity.class.getSimpleName();
@@ -51,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        addRoutinesFromDB();
+
         adsHelper =  new AdsHelper(getWindow().getDecorView(), getResources().getString(R.string.admob_id_routines), this);
 
         adsHelper.setUpAds();
@@ -63,6 +71,34 @@ public class MainActivity extends AppCompatActivity {
             }
         }, delay, period);
 
+    }
+
+    public void addRoutinesFromDB(){
+        StretchesDBHelper stretchesDBHelper = new StretchesDBHelper(this);
+        SQLiteDatabase sqLiteDatabase = stretchesDBHelper.getReadableDatabase();
+
+        String[] projection = {DBTableConstants.ROUTINE_NAME, DBTableConstants.ROUTINE_IMAGE,
+            DBTableConstants.ROUTINE_ID
+        };
+
+        Cursor c = sqLiteDatabase.query(DBTableConstants.ROUTINE_TABLE_NAME, projection, null,
+                null, null, null, null);
+        c.moveToFirst();
+
+        while(!c.isAfterLast()){
+            String routineName = c.getString(0);
+            byte[] bytes = c.getBlob(1);
+            int id = c.getInt(2);
+            if(bytes == null){
+                routineItems.add(new RoutineItem(id, 0, routineName));
+            }else{
+                Bitmap bitmap = DbBitmapUtility.getImage(bytes);
+                routineItems.add(new RoutineItem(id, bitmap, routineName));
+            }
+        }
+        routineListAdapter.notifyDataSetChanged();;
+        c.close();
+        sqLiteDatabase.close();
     }
 
     public void createRoutineOnClick(View view){

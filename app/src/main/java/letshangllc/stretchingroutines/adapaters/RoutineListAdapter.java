@@ -49,7 +49,12 @@ public class RoutineListAdapter extends ArrayAdapter<RoutineItem> {
         }
         // Populate the data into the template view using the data object
 
-        viewHolder.routineImg.setImageDrawable(ContextCompat.getDrawable(getContext(), item.getRoutineIconIndex()));
+        if(item.icon == null){
+            viewHolder.routineImg.setImageDrawable(ContextCompat.getDrawable(getContext(), item.getRoutineIconIndex()));
+        }else{
+            viewHolder.routineImg.setImageBitmap(item.icon);
+        }
+
         viewHolder.routineName.setText(item.getName());
 
 

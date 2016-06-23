@@ -12,7 +12,7 @@ public class RoutineItem {
     int id;
     public Bitmap icon;
 
-    public RoutineItem(Bitmap icon, int id, String name) {
+    public RoutineItem(int id,Bitmap icon,  String name) {
         this.icon = icon;
         this.id = id;
         this.name = name;
