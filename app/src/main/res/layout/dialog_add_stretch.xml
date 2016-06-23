@@ -55,5 +55,13 @@
             android:text="@string/upload_photo"
             android:id="@+id/btnUpload"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/photo_uploaded"
+            android:textSize="@dimen/dialog_upload_text_sz"
+            android:id="@+id/tvPhotoUploaded"
+            android:visibility="gone"/>
+
     </LinearLayout>
 </LinearLayout>

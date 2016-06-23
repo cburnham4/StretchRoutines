@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -34,6 +35,7 @@ public class AddStretchDialog extends DialogFragment {
     private  Listener mListener;
     private static final int SELECT_PICTURE = 1;
     private Bitmap bitmap;
+    private TextView tvPhotoUploaded;
 
     public interface Listener {
         void onDialogPositiveClick(String name, int duration, String description,Bitmap bitmap);
@@ -56,6 +58,7 @@ public class AddStretchDialog extends DialogFragment {
         final EditText etDuration = (EditText) view.findViewById(R.id.etStretchDuration);
         final EditText etDescription = (EditText) view.findViewById(R.id.etStretchDescription);
         final EditText etName = (EditText) view.findViewById(R.id.etStretchName);
+        tvPhotoUploaded = (TextView) view.findViewById(R.id.tvPhotoUploaded);
         Button btnUpload = (Button) view.findViewById(R.id.btnUpload);
 
         btnUpload.setOnClickListener(new View.OnClickListener() {
@@ -109,6 +112,7 @@ public class AddStretchDialog extends DialogFragment {
                     String selectedImagePath = selectedImageUri.getPath();
                     Log.i(TAG, "PATH: " + selectedImagePath);
                     bitmap = (Bitmap) MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+                    tvPhotoUploaded.setVisibility(View.VISIBLE);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

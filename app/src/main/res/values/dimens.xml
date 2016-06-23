@@ -30,6 +30,7 @@
     <dimen name="dialog_margin">24dp</dimen>
     <dimen name="dialog_title_size">20sp</dimen>
     <dimen name="dialog_margin_between_items">20dp</dimen>
+    <dimen name="dialog_upload_text_sz">10sp</dimen>
 
     <!-- Stretch item -->
     <dimen name="stretch_name_top_margin">8dp</dimen>
