@@ -95,7 +95,7 @@ public class CreateRoutineActivity extends AppCompatActivity {
         addStretchDialog.setCallback(new AddStretchDialog.Listener() {
             @Override
             public void onDialogPositiveClick(String name, int duration, String description, Bitmap bitmap) {
-                Stretch stretch = new Stretch(bitmap, duration, description, name);
+                Stretch stretch = new Stretch(name, description, bitmap, duration);
                 stretches.add(stretch);
                 stretchesAdapter.notifyDataSetChanged();
             }
@@ -114,6 +114,7 @@ public class CreateRoutineActivity extends AppCompatActivity {
         int routineId = this.storeRoutine(routineName);
 
         addStretchesToDatabase(routineId);
+        finish();
     }
 
     public int storeRoutine(String routineName){

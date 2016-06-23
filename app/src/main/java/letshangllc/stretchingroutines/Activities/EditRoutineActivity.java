@@ -115,7 +115,7 @@ public class EditRoutineActivity extends AppCompatActivity {
         addStretchDialog.setCallback(new AddStretchDialog.Listener() {
             @Override
             public void onDialogPositiveClick(String name, int duration, String description, Bitmap bitmap) {
-                Stretch stretch = new Stretch(bitmap, duration, description, name);
+                Stretch stretch = new Stretch(name, description, bitmap, duration);
                 stretches.add(stretch);
                 stretchesAdapter.notifyDataSetChanged();
 

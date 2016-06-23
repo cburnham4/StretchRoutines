@@ -9,7 +9,7 @@ import android.graphics.drawable.Drawable;
 public class RoutineItem {
     int routineIconIndex;
     String name;
-    int id;
+    public int id;
     public Bitmap icon;
 
     public RoutineItem(int id,Bitmap icon,  String name) {

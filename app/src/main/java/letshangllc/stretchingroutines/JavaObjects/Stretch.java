@@ -8,10 +8,10 @@ import android.graphics.Bitmap;
 public class Stretch {
     private String name;
     private String instructions;
-    private int drawableIndex;
+    private int drawableIndex = 0;
     private int time;
 
-    public Stretch(Bitmap bitmap, int time, String instructions, String name) {
+    public Stretch(String name, String instructions, Bitmap bitmap, int time) {
         this.bitmap = bitmap;
         this.time = time;
         this.instructions = instructions;

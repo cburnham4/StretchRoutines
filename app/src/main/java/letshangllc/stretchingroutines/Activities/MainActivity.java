@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.lv_routines);
 
-        Routines routines = new Routines();
+        final Routines routines = new Routines();
         routineItems = routines.getRoutines();
 
         routineListAdapter = new RoutineListAdapter(this, routineItems);
@@ -52,7 +53,9 @@ public class MainActivity extends AppCompatActivity {
                 /* When a day is selected go to the Lifts Activity */
                 Intent intent = new Intent(MainActivity.this, StretchActivity.class);
 
-                intent.putExtra(getString(R.string.routine_index_intent), position);
+                RoutineItem item = routineListAdapter.getItem(position);
+
+                intent.putExtra(getString(R.string.routine_index_intent), item.id);
                 startActivity(intent);
             }
         });
@@ -87,14 +90,17 @@ public class MainActivity extends AppCompatActivity {
 
         while(!c.isAfterLast()){
             String routineName = c.getString(0);
+            Log.i(TAG, routineName);
             byte[] bytes = c.getBlob(1);
+
             int id = c.getInt(2);
             if(bytes == null){
-                routineItems.add(new RoutineItem(id, 0, routineName));
+                routineItems.add(new RoutineItem(id,R.drawable.silhouette, routineName));
             }else{
                 Bitmap bitmap = DbBitmapUtility.getImage(bytes);
                 routineItems.add(new RoutineItem(id, bitmap, routineName));
             }
+            c.moveToNext();
         }
         routineListAdapter.notifyDataSetChanged();;
         c.close();
