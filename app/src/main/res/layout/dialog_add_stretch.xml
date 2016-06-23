@@ -45,7 +45,14 @@
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
             android:id="@+id/etStretchDescription"
-            android:lines="3"/>
+            android:lines="3"
+            android:hint="@string/description"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/upload_photo"
+            android:id="@+id/btnUpload"/>
 
     </LinearLayout>
 </LinearLayout>

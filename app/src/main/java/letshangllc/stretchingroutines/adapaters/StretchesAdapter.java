@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import letshangllc.stretchingroutines.JavaObjects.Stretch;
@@ -50,9 +51,12 @@ public class StretchesAdapter extends ArrayAdapter<Stretch> {
         }
         // Populate the data into the template view using the data object
 
-        viewHolder.stretchImg.setImageDrawable(ContextCompat.getDrawable(getContext(), item.getDrawableIndex()));
+        if(item.bitmap != null){
+            viewHolder.stretchImg.setImageBitmap(item.bitmap);
+        }
+
         viewHolder.tvName.setText(item.getName());
-        viewHolder.tvDuration.setText(item.getTime());
+        viewHolder.tvDuration.setText(String.format(Locale.US, "%d", item.getTime()));
         viewHolder.tvInstruction.setText(item.getInstructions());
 
 

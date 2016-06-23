@@ -1,5 +1,7 @@
 package letshangllc.stretchingroutines.JavaObjects;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by cvburnha on 4/14/2016.
  */
@@ -8,6 +10,15 @@ public class Stretch {
     private String instructions;
     private int drawableIndex;
     private int time;
+
+    public Stretch(Bitmap bitmap, int time, String instructions, String name) {
+        this.bitmap = bitmap;
+        this.time = time;
+        this.instructions = instructions;
+        this.name = name;
+    }
+
+    public Bitmap bitmap;
 
     public Stretch(String name, String instructions, int drawableIndex, int time) {
         this.name = name;

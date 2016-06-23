@@ -1,5 +1,6 @@
 package letshangllc.stretchingroutines.Activities;
 
+import android.graphics.Bitmap;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -54,9 +55,13 @@ public class CreateRoutineActivity extends AppCompatActivity {
 
         addStretchDialog.setCallback(new AddStretchDialog.Listener() {
             @Override
-            public void onDialogPositiveClick(String name, int duration, String description) {
-                Stretch stretch = new Stretch(name, description, 0, duration);
+            public void onDialogPositiveClick(String name, int duration, String description, Bitmap bitmap) {
+                if(bitmap != null){
+
+                }
+                Stretch stretch = new Stretch(bitmap, duration, description, name);
                 stretches.add(stretch);
+                stretchesAdapter.notifyDataSetChanged();
             }
         });
 
