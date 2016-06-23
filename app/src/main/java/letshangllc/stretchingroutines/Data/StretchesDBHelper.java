@@ -25,8 +25,9 @@ public class StretchesDBHelper extends SQLiteOpenHelper {
     private static final String ROUTINE_TABLE_CREATE =
             "CREATE TABLE "+  DBTableConstants.ROUTINE_TABLE_NAME +" ("
                     + DBTableConstants.ROUTINE_ID + " integer primary key AUTOINCREMENT, " //spotid
-                    + DBTableConstants.ROUTINE_NAME +"  TEXT "
-                    + ")";
+                    + DBTableConstants.ROUTINE_NAME +"  TEXT, "
+                    + DBTableConstants.ROUTINE_IMAGE + " BLOB "
+                    + " )";
 
     private static final String ROUTINE_STRETCH_TABLE_CREATE =
             "CREATE TABLE "+  DBTableConstants.ROUTINE_STRETCH_TABLE +" ("

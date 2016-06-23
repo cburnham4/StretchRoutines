@@ -14,6 +14,7 @@ final public class DBTableConstants {
     public static final String ROUTINE_ID = "RoutineId";
     public static final String ROUTINE_TABLE_NAME = "RoutineTable";
     public static final String ROUTINE_NAME = "RoutineName";
+    public static final String ROUTINE_IMAGE = "RoutineImage";
 
     public static final String ROUTINE_STRETCH_TABLE = "RoutineStretchTable";
 }

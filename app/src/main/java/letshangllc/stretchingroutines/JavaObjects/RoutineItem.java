@@ -1,5 +1,6 @@
 package letshangllc.stretchingroutines.JavaObjects;
 
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 
 /**
@@ -9,6 +10,13 @@ public class RoutineItem {
     int routineIconIndex;
     String name;
     int id;
+    public Bitmap icon;
+
+    public RoutineItem(Bitmap icon, int id, String name) {
+        this.icon = icon;
+        this.id = id;
+        this.name = name;
+    }
 
     public RoutineItem(int id, int routineIconIndex, String name) {
         this.id = id;

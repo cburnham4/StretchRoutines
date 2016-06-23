@@ -104,6 +104,7 @@ public class CreateRoutineActivity extends AppCompatActivity {
         addStretchDialog.show(getSupportFragmentManager(), TAG);
     }
 
+    /* todo store routine image */
     public void storeRoutineData(){
         String routineName = etRoutineName.getText().toString();
         if(routineName.isEmpty()){
