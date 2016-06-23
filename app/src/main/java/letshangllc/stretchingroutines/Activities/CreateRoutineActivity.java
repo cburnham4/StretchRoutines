@@ -1,6 +1,8 @@
 package letshangllc.stretchingroutines.Activities;
 
 import android.content.ContentValues;
+import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.support.design.widget.TextInputEditText;
@@ -37,10 +39,18 @@ public class CreateRoutineActivity extends AppCompatActivity {
     /* DataBaseHelper */
     private StretchesDBHelper stretchesDBHelper;
 
+    /*Routine Variables */
+    private int routineId;
+    private String routineName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_routine);
+
+        Intent intent = getIntent();
+        routineId = intent.getIntExtra(getString(R.string.routine_id_extra), 0);
+        routineName = intent.getStringExtra(getString(R.string.routine_name_extra));
 
         stretchesDBHelper = new StretchesDBHelper(this);
         this.getExistingData();
@@ -48,7 +58,25 @@ public class CreateRoutineActivity extends AppCompatActivity {
     }
 
     public void getExistingData(){
+        SQLiteDatabase db = stretchesDBHelper.getReadableDatabase();
         stretches =  new ArrayList<>();
+
+        String sql = "SELECT * FROM " +DBTableConstants.STRETCH_TABLE_NAME +
+                " INNER JOIN " + DBTableConstants.ROUTINE_STRETCH_TABLE +
+                " ON " + DBTableConstants.STRETCH_TABLE_NAME + "." + DBTableConstants.ROUTINE_ID +
+                " = " + DBTableConstants.ROUTINE_STRETCH_TABLE + "." + DBTableConstants.ROUTINE_ID +
+                " WHERE " + DBTableConstants.ROUTINE_STRETCH_TABLE + "." + DBTableConstants.ROUTINE_ID +
+                " = " + routineId;
+
+
+        Cursor c = db.rawQuery(sql, null);
+
+        c.moveToFirst();
+
+        while(!c.isAfterLast()){
+            
+            c.moveToNext();
+        }
 
     }
 

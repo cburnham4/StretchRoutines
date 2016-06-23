@@ -28,6 +28,12 @@ public class StretchesDBHelper extends SQLiteOpenHelper {
                     + DBTableConstants.ROUTINE_NAME +"  TEXT "
                     + ")";
 
+    private static final String ROUTINE_STRETCH_TABLE_CREATE =
+            "CREATE TABLE "+  DBTableConstants.ROUTINE_STRETCH_TABLE +" ("
+                    + DBTableConstants.ROUTINE_ID + " integer, " //spotid
+                    + DBTableConstants.STRETCH_ID +"  integer "
+                    + ")";
+
     public StretchesDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }

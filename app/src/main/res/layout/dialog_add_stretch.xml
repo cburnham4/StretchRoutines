@@ -61,6 +61,7 @@
             android:text="@string/photo_uploaded"
             android:textSize="@dimen/dialog_upload_text_sz"
             android:id="@+id/tvPhotoUploaded"
+            android:layout_gravity="center_horizontal"
             android:visibility="gone"/>
 
     </LinearLayout>

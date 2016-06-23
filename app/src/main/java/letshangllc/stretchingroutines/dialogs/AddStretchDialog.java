@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -85,7 +86,8 @@ public class AddStretchDialog extends DialogFragment {
                             int duration = Integer.parseInt(durationString);
                             mListener.onDialogPositiveClick(name, duration, description, bitmap);
                         }else{
-                            return;
+                            Toast.makeText(getContext(), "One or more fields left blank", Toast.LENGTH_SHORT).show();
+
                         }
 
 
