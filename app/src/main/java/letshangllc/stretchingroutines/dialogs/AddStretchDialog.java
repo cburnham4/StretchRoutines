@@ -34,7 +34,7 @@ public class AddStretchDialog extends DialogFragment {
 
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
-        View view = inflater.inflate(R.layout.dialog_add_routine, null);
+        View view = inflater.inflate(R.layout.dialog_add_stretch, null);
 
         final EditText etDuration = (EditText) view.findViewById(R.id.etStretchDuration);
         final EditText etDescription = (EditText) view.findViewById(R.id.etStretchDescription);
