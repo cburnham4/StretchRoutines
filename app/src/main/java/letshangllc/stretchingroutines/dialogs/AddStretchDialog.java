@@ -21,6 +21,7 @@ import android.widget.EditText;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.URI;
 
 import letshangllc.stretchingroutines.R;
 
@@ -104,6 +105,9 @@ public class AddStretchDialog extends DialogFragment {
                 }
                 bitmap = null;
                 try {
+                    Uri selectedImageUri = data.getData();
+                    String selectedImagePath = selectedImageUri.getPath();
+                    Log.i(TAG, "PATH: " + selectedImagePath);
                     bitmap = (Bitmap) MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
                 } catch (IOException e) {
                     e.printStackTrace();

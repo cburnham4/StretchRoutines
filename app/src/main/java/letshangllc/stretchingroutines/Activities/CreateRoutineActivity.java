@@ -1,5 +1,6 @@
 package letshangllc.stretchingroutines.Activities;
 
+import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.support.design.widget.TextInputEditText;
@@ -14,11 +15,13 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import letshangllc.stretchingroutines.Data.DBTableConstants;
 import letshangllc.stretchingroutines.Data.StretchesDBHelper;
 import letshangllc.stretchingroutines.JavaObjects.Stretch;
 import letshangllc.stretchingroutines.R;
 import letshangllc.stretchingroutines.adapaters.StretchesAdapter;
 import letshangllc.stretchingroutines.dialogs.AddStretchDialog;
+import letshangllc.stretchingroutines.helpers.DbBitmapUtility;
 
 public class CreateRoutineActivity extends AppCompatActivity {
     private static final String TAG = CreateRoutineActivity.class.getSimpleName();
@@ -77,6 +80,19 @@ public class CreateRoutineActivity extends AppCompatActivity {
     public void addToDatabase(Stretch stretch){
         SQLiteDatabase db = stretchesDBHelper.getWritableDatabase();
 
+        byte[] bytes = null;
+        if(stretch.bitmap != null){
+            bytes = DbBitmapUtility.getBytes(stretch.bitmap);
+        }
+
+
+        ContentValues cv = new ContentValues();
+        cv.put(DBTableConstants.STRETCH_NAME, stretch.getName());
+        cv.put(DBTableConstants.STRETCH_IMAGE, bytes);
+        cv.put(DBTableConstants.STRETCH_DURATION, stretch.getTime());
+        cv.put(DBTableConstants.STRETCH_INSTRUCTION, stretch.getInstructions());
+
+        db.insert(DBTableConstants.STRETCH_TABLE_NAME, null, cv);
     }
 
 
