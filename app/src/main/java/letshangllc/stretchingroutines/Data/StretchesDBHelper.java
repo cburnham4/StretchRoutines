@@ -20,7 +20,7 @@ public class StretchesDBHelper extends SQLiteOpenHelper {
                     + DBTableConstants.STRETCH_DURATION + " integer, "
                     + DBTableConstants.STRETCH_INSTRUCTION + " text, "
                     + DBTableConstants.STRETCH_IMAGE + " BLOB "
-                    + DBTableConstants.ROUTINE_ID +" )";
+                    + " )";
 
     private static final String ROUTINE_TABLE_CREATE =
             "CREATE TABLE "+  DBTableConstants.ROUTINE_TABLE_NAME +" ("

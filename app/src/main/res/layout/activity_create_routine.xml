@@ -32,12 +32,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/change_routine_photo"/>
+            android:text="@string/change_routine_photo"
+            android:id="@+id/tvCreateRoutine"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/routine_name_hint"/>
+            android:hint="@string/routine_name_hint"
+            android:id="@+id/etRoutineName"/>
 
         <Button
             android:layout_width="match_parent"

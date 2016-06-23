@@ -156,7 +156,7 @@ public class EditRoutineActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.complete:
-                storeRoutineData();
+                //storeRoutineData();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

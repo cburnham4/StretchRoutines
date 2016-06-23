@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -42,6 +43,9 @@ public class CreateRoutineActivity extends AppCompatActivity {
 
     /* DataBaseHelper */
     private StretchesDBHelper stretchesDBHelper;
+
+    /* Routine Name EditText */
+    private EditText etRoutineName;
 
 
     @Override
@@ -81,6 +85,8 @@ public class CreateRoutineActivity extends AppCompatActivity {
         stretchesAdapter = new StretchesAdapter(this, stretches);
 
         lvStretches.setAdapter(stretchesAdapter);
+
+        etRoutineName = (EditText) findViewById(R.id.etRoutineName);
     }
 
     public void addStretchOnClick(View view) {
@@ -99,14 +105,47 @@ public class CreateRoutineActivity extends AppCompatActivity {
     }
 
     public void storeRoutineData(){
-        this.storeRoutine();
+        String routineName = etRoutineName.getText().toString();
+        if(routineName.isEmpty()){
+            Toast.makeText(this, "Routine name is empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        int routineId = this.storeRoutine(routineName);
+
+        addStretchesToDatabase(routineId);
     }
 
-    public void storeRoutine(){
+    public int storeRoutine(String routineName){
+        SQLiteDatabase db = stretchesDBHelper.getWritableDatabase();
 
+        ContentValues cv = new ContentValues();
+        cv.put(DBTableConstants.ROUTINE_NAME, routineName);
+
+        db.insert(DBTableConstants.ROUTINE_TABLE_NAME, null, cv);
+
+        db.close();
+
+        return this.getRoutineId();
     }
 
-    public void addStretchesToDatabase() {
+    public int getRoutineId(){
+        SQLiteDatabase db = stretchesDBHelper.getReadableDatabase();
+
+        String sql = "SELECT MAX("+ DBTableConstants.ROUTINE_ID +") " +
+                "FROM " + DBTableConstants.ROUTINE_TABLE_NAME;
+        Cursor c = db.rawQuery(sql, null);
+
+        c.moveToFirst();
+
+        int id = c.getInt(0);
+
+        c.close();
+        db.close();
+
+        return id;
+    }
+
+    public void addStretchesToDatabase(int routineId) {
         SQLiteDatabase db = stretchesDBHelper.getWritableDatabase();
 
         /* Add each stretch to the routine */
@@ -116,15 +155,40 @@ public class CreateRoutineActivity extends AppCompatActivity {
                 bytes = DbBitmapUtility.getBytes(stretch.bitmap);
             }
 
+            /* Insert stretch into db */
             ContentValues cv = new ContentValues();
             cv.put(DBTableConstants.STRETCH_NAME, stretch.getName());
             cv.put(DBTableConstants.STRETCH_IMAGE, bytes);
             cv.put(DBTableConstants.STRETCH_DURATION, stretch.getTime());
             cv.put(DBTableConstants.STRETCH_INSTRUCTION, stretch.getInstructions());
-
             db.insert(DBTableConstants.STRETCH_TABLE_NAME, null, cv);
+
+            int stretchId = getStretchId();
+
+            /* Insert routine Id and stretch ID into db */
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(DBTableConstants.ROUTINE_ID, routineId);
+            contentValues.put(DBTableConstants.STRETCH_ID, stretchId);
+            db.insert(DBTableConstants.ROUTINE_STRETCH_TABLE, null, contentValues);
         }
         db.close();
+    }
+
+    public int getStretchId(){
+        SQLiteDatabase db = stretchesDBHelper.getReadableDatabase();
+
+        String sql = "SELECT MAX("+ DBTableConstants.STRETCH_ID +") " +
+                "FROM " + DBTableConstants.STRETCH_TABLE_NAME;
+        Cursor c = db.rawQuery(sql, null);
+
+        c.moveToFirst();
+
+        int id = c.getInt(0);
+
+        c.close();
+        db.close();
+
+        return id;
     }
 
     @Override
