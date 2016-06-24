@@ -9,8 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class StretchesDBHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 3;
-    private  static final String DATABASE_NAME ="BShotsDatabase2.db";
+    private static final int DATABASE_VERSION = 1;
+    private  static final String DATABASE_NAME ="StretchesDatabase.db";
     //private static final String DICTIONARY_TABLE_NAME = "dictionary";
 
     private static final String STRETCHES_TABLE_CREATE =

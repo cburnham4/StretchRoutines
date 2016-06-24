@@ -148,7 +148,7 @@ public class CreateRoutineActivity extends AppCompatActivity {
     }
 
     public void addStretchesToDatabase(int routineId) {
-        SQLiteDatabase db = stretchesDBHelper.getWritableDatabase();
+
 
         /* Add each stretch to the routine */
         for (Stretch stretch : stretches) {
@@ -156,7 +156,7 @@ public class CreateRoutineActivity extends AppCompatActivity {
             if (stretch.bitmap != null) {
                 bytes = DbBitmapUtility.getBytes(stretch.bitmap);
             }
-
+            SQLiteDatabase db = stretchesDBHelper.getWritableDatabase();
             /* Insert stretch into db */
             ContentValues cv = new ContentValues();
             cv.put(DBTableConstants.STRETCH_NAME, stretch.getName());
@@ -165,15 +165,20 @@ public class CreateRoutineActivity extends AppCompatActivity {
             cv.put(DBTableConstants.STRETCH_INSTRUCTION, stretch.getInstructions());
             db.insert(DBTableConstants.STRETCH_TABLE_NAME, null, cv);
 
+            db.close();
             int stretchId = getStretchId();
+
+            db = stretchesDBHelper.getWritableDatabase();
+
 
             /* Insert routine Id and stretch ID into db */
             ContentValues contentValues = new ContentValues();
             contentValues.put(DBTableConstants.ROUTINE_ID, routineId);
             contentValues.put(DBTableConstants.STRETCH_ID, stretchId);
             db.insert(DBTableConstants.ROUTINE_STRETCH_TABLE, null, contentValues);
+            db.close();
         }
-        db.close();
+
     }
 
     public int getStretchId(){
@@ -188,8 +193,8 @@ public class CreateRoutineActivity extends AppCompatActivity {
         int id = c.getInt(0);
 
         c.close();
-        db.close();
 
+        db.close();
         return id;
     }
 

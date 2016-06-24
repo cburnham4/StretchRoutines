@@ -58,7 +58,6 @@ public class AdsHelper implements AdListener {
 
     public void refreshAd()
     {
-        Log.e("REFRESH", "refreshing ad now");
         amazonAdView.loadAd(new com.amazon.device.ads.AdTargetingOptions());
     }
 

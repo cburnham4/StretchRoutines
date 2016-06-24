@@ -46,11 +46,13 @@ public class MainActivity extends AppCompatActivity {
         routineListAdapter = new RoutineListAdapter(this, routineItems);
 
         listView.setAdapter(routineListAdapter);
+        addRoutinesFromDB();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
                 /* When a day is selected go to the Lifts Activity */
+                Log.i(TAG, "Item Clicked");
                 Intent intent = new Intent(MainActivity.this, StretchActivity.class);
 
                 RoutineItem item = routineListAdapter.getItem(position);
@@ -60,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        addRoutinesFromDB();
+
 
         adsHelper =  new AdsHelper(getWindow().getDecorView(), getResources().getString(R.string.admob_id_routines), this);
 
