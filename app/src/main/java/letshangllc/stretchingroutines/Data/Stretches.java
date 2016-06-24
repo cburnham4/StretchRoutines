@@ -9,8 +9,10 @@ import letshangllc.stretchingroutines.R;
 public final class Stretches {
     public static Stretch upperBackRelease = new Stretch("Upper Back Release", "While kneeling or standing, reach your arms out locking your hands. " +
             "Round upper back and keep arms straight", R.drawable.upper_back_release, 15);
-    public static Stretch sideReachStretch = new Stretch("Side Stretch", "While standing, reach your arms overhead and lock hands. " +
-            "Bend to the side to strech. Switch direction half way.", R.drawable.side_stretch, 30);
+    public static Stretch sideReachStretchLeft = new Stretch("Side Stretch - Left", "While standing, reach your arms overhead and lock hands. " +
+            "Bend to the side to strech. Switch direction half way.", R.drawable.side_stretch, 20);
+    public static Stretch sideReachStretchRight = new Stretch("Side Stretch - Right", "While standing, reach your arms overhead and lock hands. " +
+            "Bend to the side to strech. Switch direction half way.", R.drawable.side_stretch, 20);
     public static Stretch downWardDog = new Stretch("Downward Dog", "Go on all fours then push with your hands and straighten your legs." +
             "  Extend your pelvic bones up and heels down.", R.drawable.man_flexing_waist, 30);
 
@@ -74,10 +76,10 @@ public final class Stretches {
     public static Stretch simplePeacock = new Stretch("Simple Peacock" ," Stand up straight with your feet at your hips width. Clasp your hands behind your back. Move your arms away from your back with your shoulder blades pointing at " +
             "each other. Arch back a little and start bending forward.", R.drawable.woman_flexing_waist_to_feet, 30);
 
-    public static Stretch hamStringStretchRight = new Stretch("Hamstring Stretch", "Lie on your back. Raise your right leg as high as you can keeping your pelvis flat on the ground. Hold your foot and" +
+    public static Stretch hamStringStretchRight = new Stretch("Hamstring - Right", "Lie on your back. Raise your right leg as high as you can keeping your pelvis flat on the ground. Hold your foot and" +
             " encourage the leg to move toward your head. Flex your foot to stretch your calf too.", R.drawable.woman_laying_on_the_floor_stretching_right_leg,15);
 
-    public static Stretch hamStringStretchLeft = new Stretch("Hamstring Stretch", "Lie on your back. Raise your left leg as high as you can keeping your pelvis flat on the ground. Hold your foot and" +
+    public static Stretch hamStringStretchLeft = new Stretch("Hamstring - Left", "Lie on your back. Raise your left leg as high as you can keeping your pelvis flat on the ground. Hold your foot and" +
             " encourage the leg to move toward your head. Flex your foot to stretch your calf too.", R.drawable.woman_laying_on_the_floor_stretching_right_leg,15);
 
     public static Stretch butterfly = new Stretch("Butterfly - Groin Stretch", "Sit up tall with the soles of your " +

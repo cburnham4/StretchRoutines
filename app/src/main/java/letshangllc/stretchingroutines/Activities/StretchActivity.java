@@ -39,6 +39,8 @@ public class StretchActivity extends AppCompatActivity {
     private TextView tv_timer;
     private int currentStretch;
 
+    private CountDownTimer countDownTimer;
+
     private AdsHelper adsHelper;
 
     /* Alarm */
@@ -109,10 +111,12 @@ public class StretchActivity extends AppCompatActivity {
         tv_stretchName.setText(stretch.getName());
         tv_instructions.setText(stretch.getInstructions());
         if(stretch.bitmap != null){
+            img_stretch.setVisibility(View.VISIBLE);
             img_stretch.setImageBitmap(stretch.bitmap);
         }else if(stretch.getDrawableIndex() == 0){
             img_stretch.setVisibility(View.INVISIBLE);
         }else{
+            img_stretch.setVisibility(View.VISIBLE);
             img_stretch.setImageDrawable(ContextCompat.getDrawable(this, stretch.getDrawableIndex()));
         }
 
@@ -121,11 +125,16 @@ public class StretchActivity extends AppCompatActivity {
         startCountdown(stretch.getTime()*1000);
     }
 
+    public void nextExerciseOnClick(View view){
+        countDownTimer.cancel();
+        currentStretch++;
+        startStretches();
+    }
     private void startCountdown(int timer){
-        new CountDownTimer(timer, 1000) {
+        countDownTimer = new CountDownTimer(timer, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                tv_timer.setText("" + millisUntilFinished / 1000);
+                tv_timer.setText("" + (millisUntilFinished / 1000));
             }
 
             public void onFinish() {
@@ -134,7 +143,8 @@ public class StretchActivity extends AppCompatActivity {
                 startStretches();
 
             }
-        }.start();
+        };
+        countDownTimer.start();
     }
 
     public void getStretches(int routineId){
@@ -212,5 +222,11 @@ public class StretchActivity extends AppCompatActivity {
             }
         }).start();
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        countDownTimer.cancel();
     }
 }

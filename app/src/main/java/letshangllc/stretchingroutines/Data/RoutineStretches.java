@@ -11,7 +11,7 @@ public final class RoutineStretches {
 
     public static Stretch[] morningStretches = {Stretches.forwardBend, Stretches.upperBackRelease,
             Stretches.chairPose,
-            Stretches.sideReachStretch, Stretches.downWardDog, Stretches.plank
+            Stretches.sideReachStretchLeft, Stretches.sideReachStretchRight, Stretches.downWardDog, Stretches.plank
     };
 
     public static Stretch[] backStretches = {Stretches.sitAndReach, Stretches.kneePress, Stretches.hamStringStretchLeft,
