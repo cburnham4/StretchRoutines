@@ -4,10 +4,15 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.media.AudioManager;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.CountDownTimer;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,6 +31,8 @@ import letshangllc.stretchingroutines.R;
 import letshangllc.stretchingroutines.helpers.DbBitmapUtility;
 
 public class StretchActivity extends AppCompatActivity {
+    private static final String TAG = StretchActivity.class.getSimpleName();
+
     private TextView tv_stretchName;
     private TextView tv_instructions;
     private ImageView img_stretch;
@@ -33,6 +40,9 @@ public class StretchActivity extends AppCompatActivity {
     private int currentStretch;
 
     private AdsHelper adsHelper;
+
+    /* Alarm */
+    private Ringtone r;
 
     private ArrayList<Stretch> stretches;
     @Override
@@ -116,9 +126,10 @@ public class StretchActivity extends AppCompatActivity {
             }
 
             public void onFinish() {
-               tv_timer.setText("Done!");
+                playAlarm();
                 currentStretch++;
                 startStretches();
+
             }
         }.start();
     }
@@ -128,8 +139,7 @@ public class StretchActivity extends AppCompatActivity {
         SQLiteDatabase db = stretchesDBHelper.getReadableDatabase();
          /* Query the db to get the muscle data */
 
-        String sql = "SELECT " + DBTableConstants.STRETCH_NAME +", " + DBTableConstants.STRETCH_DURATION +
-                ", " + DBTableConstants.STRETCH_INSTRUCTION + ",  " + DBTableConstants.STRETCH_IMAGE +
+        String sql = "SELECT *" +
                 " FROM " + DBTableConstants.STRETCH_TABLE_NAME +
                 " INNER JOIN " + DBTableConstants.ROUTINE_STRETCH_TABLE +
                 " ON " + DBTableConstants.STRETCH_TABLE_NAME + "." + DBTableConstants.STRETCH_ID +
@@ -142,11 +152,13 @@ public class StretchActivity extends AppCompatActivity {
 
         c.moveToFirst();
 
+        Log.i(TAG, "Query count: "+ c.getCount());
         while(!c.isAfterLast()){
-            String name = c.getString(0);
-            int duration = c.getInt(1);
-            String instruction = c.getString(2);
-            byte[] bytes = c.getBlob(3);
+
+            int duration = c.getInt(c.getColumnIndex(DBTableConstants.STRETCH_DURATION));
+            String instruction = c.getString(c.getColumnIndex(DBTableConstants.STRETCH_INSTRUCTION));
+            byte[] bytes = c.getBlob(c.getColumnIndex(DBTableConstants.STRETCH_IMAGE));
+            String name = c.getString(c.getColumnIndex(DBTableConstants.STRETCH_NAME));
             if(bytes == null){
                 stretches.add(new Stretch(name, instruction, duration));
             }else{
@@ -159,5 +171,43 @@ public class StretchActivity extends AppCompatActivity {
 
         c.close();
         db.close();
+    }
+
+    private void playAlarm(){
+        /* Get the alarm tone */
+        Uri alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+
+        if(alert == null){
+            // alert is null, using backup
+            alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+            // If notication is null the use ringtone
+            if(alert == null) {
+                // alert backup is null, using 2nd backup
+                alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
+            }
+        }
+
+        try {
+            /* Play the alarm */
+            r = RingtoneManager.getRingtone(this, alert);
+            r.setStreamType(AudioManager.STREAM_ALARM);
+            r.play();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                    r.stop();
+                } catch (Exception e) {
+                    r.stop();
+                }
+
+            }
+        }).start();
+
     }
 }

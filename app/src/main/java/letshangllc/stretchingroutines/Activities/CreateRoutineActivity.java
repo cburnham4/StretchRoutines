@@ -1,5 +1,6 @@
 package letshangllc.stretchingroutines.Activities;
 
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -9,6 +10,7 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -46,6 +48,9 @@ public class CreateRoutineActivity extends AppCompatActivity {
 
     /* Routine Name EditText */
     private EditText etRoutineName;
+
+    /* Progress Dialog */
+    private ProgressDialog progressDialog;
 
 
     @Override
@@ -111,9 +116,13 @@ public class CreateRoutineActivity extends AppCompatActivity {
             Toast.makeText(this, "Routine name is empty", Toast.LENGTH_SHORT).show();
             return;
         }
+        ProgressDialog ringProgressDialog = ProgressDialog.show(CreateRoutineActivity.this,
+                "Please wait ...", "Downloading Image ...", true);
+        Log.i(TAG, "Storing data");
         int routineId = this.storeRoutine(routineName);
-
+        Log.i(TAG, "Stored routine");
         addStretchesToDatabase(routineId);
+
         finish();
     }
 
@@ -178,6 +187,7 @@ public class CreateRoutineActivity extends AppCompatActivity {
             db.insert(DBTableConstants.ROUTINE_STRETCH_TABLE, null, contentValues);
             db.close();
         }
+        Log.i(TAG, "Stored stretches");
 
     }
 

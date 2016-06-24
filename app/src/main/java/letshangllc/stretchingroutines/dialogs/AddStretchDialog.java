@@ -113,7 +113,22 @@ public class AddStretchDialog extends DialogFragment {
                     Uri selectedImageUri = data.getData();
                     String selectedImagePath = selectedImageUri.getPath();
                     Log.i(TAG, "PATH: " + selectedImagePath);
-                    bitmap = (Bitmap) MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+                    Bitmap bitmap1 = (Bitmap) MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+                    double width = bitmap1.getWidth()* 1.0;
+                    double height = bitmap1.getHeight() * 1.0;
+                    if(width>1024 || height>1024){
+                        if(width>height){
+                            double scale = 1024.0/height;
+                            bitmap = Bitmap.createScaledBitmap(bitmap1,(int) (scale*width),
+                                    (int)  (height*scale), true);
+                        }else{
+                            double scale = 1024.0/width;
+                            bitmap = Bitmap.createScaledBitmap(bitmap1,(int) (scale*width),
+                                    (int)  (height*scale), true);
+                        }
+
+                    }
+
                     tvPhotoUploaded.setVisibility(View.VISIBLE);
                 } catch (IOException e) {
                     e.printStackTrace();
