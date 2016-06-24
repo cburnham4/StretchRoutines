@@ -34,9 +34,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/tv_selectStretch"
-            android:layout_above="@+id/btnCreateCustom"
+            android:layout_above="@+id/ad_layout"
             android:id="@+id/lv_routines"></ListView>
 
+    <!--
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,7 +45,7 @@
         android:id="@+id/btnCreateCustom"
         android:layout_above="@+id/ad_layout"
         android:background="@drawable/btn_background_border"
-        android:onClick="createRoutineOnClick"/>
+        android:onClick="createRoutineOnClick"/> -->
 
     <include layout="@layout/ad_layout"></include>
 

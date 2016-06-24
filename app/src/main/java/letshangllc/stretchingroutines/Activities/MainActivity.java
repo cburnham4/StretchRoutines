@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         routineListAdapter = new RoutineListAdapter(this, routineItems);
 
         listView.setAdapter(routineListAdapter);
-        addRoutinesFromDB();
+        //addRoutinesFromDB();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

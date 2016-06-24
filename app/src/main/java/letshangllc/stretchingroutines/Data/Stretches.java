@@ -64,7 +64,7 @@ public final class Stretches {
     public static Stretch warriorPoseLungeRight = new Stretch("Warrior Pose - Right", "Lunge forward, bending yout right leg to a 90 degrees angle, and keeping your left leg straight. " +
             "Reach up toward the sky.", R.drawable.woman_stretching_and_flexing_legs_with_arms_up, 15);
 
-    public static Stretch warriorPoseLungeLeft = new Stretch("Warrior Pose - Right", "Lunge forward, bending yout left leg to a 90 degrees angle, and keeping your right leg straight. " +
+    public static Stretch warriorPoseLungeLeft = new Stretch("Warrior Pose - Left", "Lunge forward, bending yout left leg to a 90 degrees angle, and keeping your right leg straight. " +
             "Reach up toward the sky.", R.drawable.woman_stretching_and_flexing_legs_with_arms_up, 15);
 
 
@@ -79,6 +79,10 @@ public final class Stretches {
 
     public static Stretch hamStringStretchLeft = new Stretch("Hamstring Stretch", "Lie on your back. Raise your left leg as high as you can keeping your pelvis flat on the ground. Hold your foot and" +
             " encourage the leg to move toward your head. Flex your foot to stretch your calf too.", R.drawable.woman_laying_on_the_floor_stretching_right_leg,15);
+
+    public static Stretch butterfly = new Stretch("Butterfly - Groin Stretch", "Sit up tall with the soles of your " +
+            "feet pressed together and your knees dropped to the sides as far as they will comfortably go", 30);
+
 
     //public static Stretch intenseLeftStretch = new Stretch("Intense Left Stretch", )
 

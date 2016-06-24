@@ -64,6 +64,9 @@ public class StretchActivity extends AppCompatActivity {
             case 99997:
                 stretches = new ArrayList<>(Arrays.asList(RoutineStretches.fullBodyStretches));
                 break;
+            case 99996:
+                stretches = new ArrayList<>(Arrays.asList(RoutineStretches.legStretches));
+                break;
             default:
                 stretches = new ArrayList<>();
         }
