@@ -23,7 +23,7 @@
             android:layout_height="@dimen/routine_image_w_h"
             android:layout_margin="@dimen/routine_image_margin"
             app:civ_border_width="2dp"
-            app:civ_border_color="@color/colorPrimary"
+            app:civ_border_color="@color/primary"
             android:id="@+id/img_routine"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/full_body_stretch"/>
