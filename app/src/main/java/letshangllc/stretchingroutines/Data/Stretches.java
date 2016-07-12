@@ -18,9 +18,9 @@ public final class Stretches {
 
     /* Todo find better photo for cow and cat */
     public static Stretch cowPose = new Stretch("Cow Pose", "While on all fours, lift your pelvis and chest toward the ceiling, " +
-            "so that your stomach moves toward the floor. Lift your head", R.drawable.man_on_his_knees, 15);
+            "so that your stomach moves toward the floor. Lift your head", R.drawable.cow_pose, 15);//R.drawable.man_on_his_knees
     public static Stretch catPose = new Stretch("Cat Pose", "Stand on all fours. Put your hands and knees at your hips' width. Round your back and hang your head down.",
-            R.drawable.man_on_his_knees, 15);
+            R.drawable.cat_pose, 15);
 
     public static Stretch harePose = new Stretch("Hare Pose", "Lower your head as you sit on your heels. Stretch your arms forward on the floor.",
             R.drawable.man_on_his_knees_stretching_arms_on_floor, 20);
@@ -83,7 +83,7 @@ public final class Stretches {
             " encourage the leg to move toward your head. Flex your foot to stretch your calf too.", R.drawable.woman_laying_on_the_floor_stretching_right_leg,15);
 
     public static Stretch butterfly = new Stretch("Butterfly - Groin Stretch", "Sit up tall with the soles of your " +
-            "feet pressed together and your knees dropped to the sides as far as they will comfortably go", 30);
+            "feet pressed together and your knees dropped to the sides as far as they will comfortably go", R.drawable.butterfly_squat, 30);
 
 
     //public static Stretch intenseLeftStretch = new Stretch("Intense Left Stretch", )

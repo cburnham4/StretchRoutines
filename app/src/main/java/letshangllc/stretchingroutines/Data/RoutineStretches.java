@@ -7,8 +7,6 @@ import letshangllc.stretchingroutines.JavaObjects.Stretch;
  * Created by cvburnha on 4/14/2016.
  */
 public final class RoutineStretches {
-
-
     public static Stretch[] morningStretches = {Stretches.forwardBend, Stretches.upperBackRelease,
             Stretches.chairPose,
             Stretches.sideReachStretchLeft, Stretches.sideReachStretchRight, Stretches.downWardDog, Stretches.plank
@@ -26,6 +24,4 @@ public final class RoutineStretches {
 
     public static Stretch[] legStretches = {Stretches.hamStringStretchLeft, Stretches.hamStringStretchRight,
      Stretches.butterfly, Stretches.downWardDog, Stretches.warriorPoseLungeLeft, Stretches.warriorPoseLungeRight};
-
-
 }
