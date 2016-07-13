@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -31,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
     private ListView listView;
     private ArrayList<RoutineItem> routineItems;
     private RoutineListAdapter routineListAdapter;
-
-    private AdsHelper adsHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,18 +64,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-        adsHelper =  new AdsHelper(getWindow().getDecorView(), getResources().getString(R.string.admob_id_routines), this);
-
-        adsHelper.setUpAds();
-        int delay = 1000; // delay for 1 sec.
-        int period = getResources().getInteger(R.integer.ad_refresh_rate);
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            public void run() {
-                adsHelper.refreshAd();  // display the data
-            }
-        }, delay, period);
+        this.runAds();
 
     }
 
@@ -119,6 +107,26 @@ public class MainActivity extends AppCompatActivity {
     private void setupToolbar(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+    }
+
+    private AdsHelper adsHelper;
+    private Handler handler = new Handler();
+
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+      /* do what you need to do */
+            adsHelper.refreshAd();
+      /* and here comes the "trick" */
+            handler.postDelayed(this, getResources().getInteger(R.integer.ad_refresh_rate));
+        }
+    };
+
+
+    private void runAds(){
+        adsHelper =  new AdsHelper(this.getWindow().getDecorView(), getResources().getString(R.string.admob_id_routines), this);
+        adsHelper.setUpAds();
+        handler.postDelayed(runnable, 100);
     }
 
 }

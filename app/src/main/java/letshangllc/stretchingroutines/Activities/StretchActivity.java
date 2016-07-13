@@ -9,6 +9,7 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,7 +42,6 @@ public class StretchActivity extends AppCompatActivity {
 
     private CountDownTimer countDownTimer;
 
-    private AdsHelper adsHelper;
 
     /* Alarm */
     private Ringtone r;
@@ -82,17 +82,7 @@ public class StretchActivity extends AppCompatActivity {
 
         startStretches();
 
-        adsHelper =  new AdsHelper(getWindow().getDecorView(), getResources().getString(R.string.admob_id_stretches), this);
-
-        adsHelper.setUpAds();
-        int delay = 1000; // delay for 1 sec.
-        int period = getResources().getInteger(R.integer.ad_refresh_rate);
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            public void run() {
-                adsHelper.refreshAd();  // display the data
-            }
-        }, delay, period);
+        this.runAds();
     }
 
     private void findViews(){
@@ -228,5 +218,26 @@ public class StretchActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         countDownTimer.cancel();
+    }
+
+
+    private AdsHelper adsHelper;
+    private Handler handler = new Handler();
+
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+      /* do what you need to do */
+            adsHelper.refreshAd();
+      /* and here comes the "trick" */
+            handler.postDelayed(this, getResources().getInteger(R.integer.ad_refresh_rate));
+        }
+    };
+
+
+    public void runAds(){
+        adsHelper =  new AdsHelper(this.getWindow().getDecorView(), getResources().getString(R.string.admob_id_stretches), this);
+        adsHelper.setUpAds();
+        handler.postDelayed(runnable, 100);
     }
 }
