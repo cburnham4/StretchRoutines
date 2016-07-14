@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -120,11 +121,12 @@ public class StretchActivity extends AppCompatActivity {
         currentStretch++;
         startStretches();
     }
+
     private void startCountdown(int timer){
         countDownTimer = new CountDownTimer(timer, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                tv_timer.setText("" + (millisUntilFinished / 1000));
+                tv_timer.setText(String.format(Locale.getDefault(), "%d" ,millisUntilFinished / 1000));
             }
 
             public void onFinish() {

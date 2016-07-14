@@ -82,8 +82,19 @@ public final class Stretches {
     public static Stretch hamStringStretchLeft = new Stretch("Hamstring - Left", "Lie on your back. Raise your left leg as high as you can keeping your pelvis flat on the ground. Hold your foot and" +
             " encourage the leg to move toward your head. Flex your foot to stretch your calf too.", R.drawable.woman_laying_on_the_floor_stretching_right_leg,15);
 
-    public static Stretch butterfly = new Stretch("Butterfly - Groin Stretch", "Sit up tall with the soles of your " +
+    public static Stretch butterfly = new Stretch("Butterfly - Groin Stretch", "Squat or sit up tall with the soles of your " +
             "feet pressed together and your knees dropped to the sides as far as they will comfortably go", R.drawable.butterfly_squat, 30);
+
+    public static Stretch lizardPoseRight = new Stretch("Lizard Pose - Right", "From downward dog, step right foot outside of " +
+            "right hand and bend the knee, coming to a lunge position, right thigh parallel to the floor, toes turned slightly out.", R.drawable.lizard_pose_right, 20);
+
+    public static Stretch lizardPoseLeft = new Stretch("Lizard Pose - Left", "From downward dog, step left foot outside of " +
+            "left hand and bend the knee, coming to a lunge position, left thigh parallel to the floor, toes turned slightly out.", R.drawable.lizard_pose_left, 20);
+
+    public static Stretch happyBaby =  new Stretch("Happy Baby", "Lie on your back, lift legs and bend knees, " +
+            "feet flexed towards the ceiling. Grab big toe of each foot with respective hand and " +
+            "further bend knees towards armpits. If able, rock left to right, gently massaging the spine.",
+            R.drawable.happy_baby, 20);
 
 
     //public static Stretch intenseLeftStretch = new Stretch("Intense Left Stretch", )

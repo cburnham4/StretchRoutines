@@ -24,4 +24,8 @@ public final class RoutineStretches {
 
     public static Stretch[] legStretches = {Stretches.hamStringStretchLeft, Stretches.hamStringStretchRight,
      Stretches.butterfly, Stretches.downWardDog, Stretches.warriorPoseLungeLeft, Stretches.warriorPoseLungeRight};
+
+    public static Stretch[] beforeBedStretches= {Stretches.forwardBend, Stretches.downWardDog,
+        Stretches.lizardPoseLeft, Stretches.lizardPoseRight, Stretches.sitAndReach, Stretches.happyBaby
+    };
 }
