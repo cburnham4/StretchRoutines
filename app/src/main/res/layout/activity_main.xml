@@ -5,103 +5,49 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
-    <android.support.design.widget.CoordinatorLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/cdLayout"
         android:layout_above="@+id/ad_layout"
-        >
+        android:orientation="vertical">
 
-        <android.support.design.widget.AppBarLayout
+        <ImageView
+            android:id="@+id/header"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/MyMaterialTheme.AppBarOverlay"
-            >
+            android:layout_height="185dp"
+            android:scaleType="centerCrop"
+            android:fitsSystemWindows="true"
+            android:contentDescription="cover_photo"
+            android:background="@drawable/stretching_photo250height"
+            app:layout_collapseMode="parallax" />
 
-            <android.support.design.widget.CollapsingToolbarLayout
-                android:id="@+id/collapse_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:contentScrim="@color/primary"
-                android:fitsSystemWindows="true">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:id="@+id/tv_orangeLine"
 
-                <ImageView
-                    android:id="@+id/header"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:fitsSystemWindows="true"
-                    android:background="@drawable/stretching_photo250height"
-                    app:layout_collapseMode="parallax" />
-
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:layout_collapseMode="parallax" />
-
-            </android.support.design.widget.CollapsingToolbarLayout>
-
-
-        </android.support.design.widget.AppBarLayout>
+            android:background="@color/orangeAccent"/>
+        <!--android:layout_below="@id/img_frontImg"-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/subtitle_height"
+            android:text="@string/select_stretch_routine"
+            android:background="@color/toolbarBackground"
+            android:gravity="center"
+            android:id="@+id/tv_selectStretch"
+            />
 
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:clipToPadding="false"
             android:id="@+id/lv_routines"
+            />
 
-            android:paddingTop="@dimen/subtitle_height"/>
-
-
-
-
-        <android.support.v4.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_below="@+id/cdLayout">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:id="@+id/tv_orangeLine"
-
-                    android:background="@color/orangeAccent"/>
-                <!--android:layout_below="@id/img_frontImg"-->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/subtitle_height"
-                    android:text="@string/select_stretch_routine"
-                    android:background="@color/toolbarBackground"
-                    android:gravity="center"
-                    android:id="@+id/tv_selectStretch"
-                    />
+    </LinearLayout>
 
 
 
-            </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
-
-
-
-    <!--
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/create_custom_routine"
-        android:id="@+id/btnCreateCustom"
-        android:layout_above="@+id/ad_layout"
-        android:background="@drawable/btn_background_border"
-        android:onClick="createRoutineOnClick"/> -->
-    </android.support.design.widget.CoordinatorLayout>
 
 
     <include layout="@layout/ad_layout"/>

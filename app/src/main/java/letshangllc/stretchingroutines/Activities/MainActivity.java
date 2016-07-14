@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.setupToolbar();
         listView = (ListView) findViewById(R.id.lv_routines);
 
         final Routines routines = new Routines();
@@ -102,11 +101,6 @@ public class MainActivity extends AppCompatActivity {
     public void createRoutineOnClick(View view){
         Intent intent = new Intent(this, CreateRoutineActivity.class);
         startActivity(intent);
-    }
-
-    private void setupToolbar(){
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
     }
 
     private AdsHelper adsHelper;

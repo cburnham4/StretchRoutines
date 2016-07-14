@@ -70,6 +70,9 @@ public class StretchActivity extends AppCompatActivity {
             case 99996:
                 stretches = new ArrayList<>(Arrays.asList(RoutineStretches.legStretches));
                 break;
+            case 99995:
+                stretches = new ArrayList<>(Arrays.asList(RoutineStretches.beforeBedStretches));
+                break;
             default:
                 stretches = new ArrayList<>();
         }
@@ -123,10 +126,12 @@ public class StretchActivity extends AppCompatActivity {
     }
 
     private void startCountdown(int timer){
-        countDownTimer = new CountDownTimer(timer, 1000) {
+        countDownTimer = new CountDownTimer(timer, 500) {
 
             public void onTick(long millisUntilFinished) {
-                tv_timer.setText(String.format(Locale.getDefault(), "%d" ,millisUntilFinished / 1000));
+                int time = Math.round(millisUntilFinished * 0.001f);
+                Log.i(TAG, String.format(Locale.getDefault(), "%d" ,time));
+                tv_timer.setText(String.format(Locale.getDefault(), "%d" ,time));
             }
 
             public void onFinish() {
@@ -220,6 +225,7 @@ public class StretchActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         countDownTimer.cancel();
+        finish();
     }
 
 
@@ -242,4 +248,6 @@ public class StretchActivity extends AppCompatActivity {
         adsHelper.setUpAds();
         handler.postDelayed(runnable, 100);
     }
+
+
 }
