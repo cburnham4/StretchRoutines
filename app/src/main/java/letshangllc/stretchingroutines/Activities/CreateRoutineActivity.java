@@ -3,30 +3,24 @@ package letshangllc.stretchingroutines.Activities;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
-import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.ContextMenu;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 import letshangllc.stretchingroutines.Data.DBTableConstants;
 import letshangllc.stretchingroutines.Data.StretchesDBHelper;
@@ -35,7 +29,6 @@ import letshangllc.stretchingroutines.R;
 import letshangllc.stretchingroutines.adapaters.StretchesAdapter;
 import letshangllc.stretchingroutines.dialogs.AddStretchDialog;
 import letshangllc.stretchingroutines.dialogs.EditStretchDialog;
-import letshangllc.stretchingroutines.helpers.DbBitmapUtility;
 import letshangllc.stretchingroutines.helpers.StoreRoutineInBackground;
 import letshangllc.stretchingroutines.helpers.StoringRoutineComplete;
 
@@ -225,7 +218,7 @@ public class CreateRoutineActivity extends AppCompatActivity {
             @Override
             public void onDialogPositiveClick(String name, int duration, String description, Bitmap bitmap) {
                 stretch.setName(name);
-                stretch.setTime(duration);
+                stretch.setDuration(duration);
                 stretch.setInstructions(description);
                 stretch.setBitmap(bitmap);
                 stretchesAdapter.notifyDataSetChanged();

@@ -9,32 +9,37 @@ public class Stretch {
     private String name;
     private String instructions;
     private int drawableIndex = 0;
-    private int time;
-
-    public Stretch(String name, String instructions, Bitmap bitmap, int time) {
-        this.bitmap = bitmap;
-        this.time = time;
-        this.instructions = instructions;
-        this.name = name;
-    }
-
-    public void setBitmap(Bitmap bitmap) {
-        this.bitmap = bitmap;
-    }
-
+    private int duration;
     public Bitmap bitmap;
+    public int id;
 
-    public Stretch(String name, String instructions, int drawableIndex, int time) {
+    public Stretch(String name, String instructions, int duration, Bitmap bitmap, int id) {
         this.name = name;
         this.instructions = instructions;
         this.drawableIndex = drawableIndex;
-        this.time = time;
+        this.duration = duration;
+        this.bitmap = bitmap;
+        this.id = id;
     }
 
-    public Stretch(String name, String instructions, int time) {
+    public Stretch(String name, String instructions, Bitmap bitmap, int duration) {
+        this.bitmap = bitmap;
+        this.duration = duration;
+        this.instructions = instructions;
+        this.name = name;
+    }
+
+    public Stretch(String name, String instructions, int drawableIndex, int duration) {
         this.name = name;
         this.instructions = instructions;
-        this.time = time;
+        this.drawableIndex = drawableIndex;
+        this.duration = duration;
+    }
+
+    public Stretch(String name, String instructions, int duration) {
+        this.name = name;
+        this.instructions = instructions;
+        this.duration = duration;
     }
 
     public String getName() {
@@ -61,11 +66,11 @@ public class Stretch {
         this.drawableIndex = drawableIndex;
     }
 
-    public int getTime() {
-        return time;
+    public int getDuration() {
+        return duration;
     }
 
-    public void setTime(int time) {
-        this.time = time;
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 }

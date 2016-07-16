@@ -16,8 +16,8 @@ import letshangllc.stretchingroutines.JavaObjects.Stretch;
 /**
  * Created by Carl on 7/16/2016.
  */
-public class StoreRoutineInBackground  extends AsyncTask<Void, Void, Void> {
-    private static final String TAG = StoreRoutineInBackground.class.getSimpleName();
+public class UpdateRoutineInBackground extends AsyncTask<Void, Void, Void> {
+    private static final String TAG = UpdateRoutineInBackground.class.getSimpleName();
 
     private ArrayList<Stretch> stretches;
     private int routineId;
@@ -27,9 +27,9 @@ public class StoreRoutineInBackground  extends AsyncTask<Void, Void, Void> {
 
     private ProgressDialog dialog;
 
-    public StoreRoutineInBackground(ArrayList<Stretch> stretches, int routineId,
-                                    StretchesDBHelper stretchesDBHelper, Context context,
-                                    StoringRoutineComplete callback) {
+    public UpdateRoutineInBackground(ArrayList<Stretch> stretches, int routineId,
+                                     StretchesDBHelper stretchesDBHelper, Context context,
+                                     StoringRoutineComplete callback) {
         this.stretches = stretches;
         this.routineId = routineId;
         this.stretchesDBHelper = stretchesDBHelper;
@@ -41,7 +41,7 @@ public class StoreRoutineInBackground  extends AsyncTask<Void, Void, Void> {
     protected void onPreExecute() {
         super.onPreExecute();
         dialog = new ProgressDialog(context);
-        dialog.setMessage("Storing Data");
+        dialog.setMessage("Updating Data");
         dialog.show();
     }
 
@@ -74,20 +74,8 @@ public class StoreRoutineInBackground  extends AsyncTask<Void, Void, Void> {
             cv.put(DBTableConstants.STRETCH_IMAGE, bytes);
             cv.put(DBTableConstants.STRETCH_DURATION, stretch.getDuration());
             cv.put(DBTableConstants.STRETCH_INSTRUCTION, stretch.getInstructions());
-            int stretchId = (int) db.insert(DBTableConstants.STRETCH_TABLE_NAME, null, cv);
-
-            /* TODO check stretch id */
-            db.close();
-
-            db = stretchesDBHelper.getWritableDatabase();
-
-
-            /* Insert routine Id and stretch ID into db */
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(DBTableConstants.ROUTINE_ID, routineId);
-            contentValues.put(DBTableConstants.STRETCH_ID, stretchId);
-            db.insert(DBTableConstants.ROUTINE_STRETCH_TABLE, null, contentValues);
-            db.close();
+            db.update(DBTableConstants.STRETCH_TABLE_NAME, cv,
+                    DBTableConstants.STRETCH_ID + " = " + stretch.id, null);
         }
         Log.i(TAG, "Stored stretches");
         return null;

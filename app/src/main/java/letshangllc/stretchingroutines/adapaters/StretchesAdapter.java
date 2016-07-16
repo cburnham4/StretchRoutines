@@ -1,7 +1,6 @@
 package letshangllc.stretchingroutines.adapaters;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +55,7 @@ public class StretchesAdapter extends ArrayAdapter<Stretch> {
         }
 
         viewHolder.tvName.setText(item.getName());
-        viewHolder.tvDuration.setText(String.format(Locale.US, "%d s", item.getTime()));
+        viewHolder.tvDuration.setText(String.format(Locale.US, "%d s", item.getDuration()));
         viewHolder.tvInstruction.setText(item.getInstructions());
 
 

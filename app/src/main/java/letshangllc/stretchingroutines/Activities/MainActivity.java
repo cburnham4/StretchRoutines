@@ -161,7 +161,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void editRoutine(RoutineItem routineItem){
+        Intent intent = new Intent(MainActivity.this, EditRoutineActivity.class);
 
+        intent.putExtra(getString(R.string.routine_index_intent), routineItem.id);
+        startActivity(intent);
     }
 
     private void confirmDelete(final RoutineItem routineItem){

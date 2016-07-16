@@ -21,8 +21,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import letshangllc.stretchingroutines.AdsHelper;
 import letshangllc.stretchingroutines.Data.DBTableConstants;
@@ -115,8 +113,8 @@ public class StretchActivity extends AppCompatActivity {
         }
 
 
-        //tv_timer.setText(stretch.getTime() +"");
-        startCountdown(stretch.getTime()*1000);
+        //tv_timer.setText(stretch.getDuration() +"");
+        startCountdown(stretch.getDuration()*1000);
     }
 
     public void nextExerciseOnClick(View view){
