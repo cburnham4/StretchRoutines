@@ -8,8 +8,8 @@ android {
         applicationId "letshangllc.stretchingroutines"
         minSdkVersion 16
         targetSdkVersion 24
-        versionCode 10
-        versionName "1.42"
+        versionCode 11
+        versionName "1.5"
     }
     buildTypes {
         release {
@@ -28,6 +28,6 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'com.google.android:flexbox:0.2.2'
 
-    compile 'com.google.android.gms:play-services-ads:9.0.2'
+    compile 'com.google.android.gms:play-services-ads:9.2.1'
     compile 'com.amazon.android:mobile-ads:5.7.2'
 }

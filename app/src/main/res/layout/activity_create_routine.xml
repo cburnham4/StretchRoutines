@@ -7,54 +7,62 @@
          tools:context=".Activities.CreateRoutineActivity">
 
     <include layout="@layout/toolbar"/>
-    <LinearLayout
+    <ScrollView
         android:layout_below="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:orientation="vertical"
-        >
-        <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/lv_routines"
+        android:id="@+id/scrollView">
+        <LinearLayout
 
-            android:layout_width="@dimen/routine_image_w_h"
-            android:layout_height="@dimen/routine_image_w_h"
-            android:layout_margin="@dimen/routine_image_margin"
-            app:civ_border_width="2dp"
-            app:civ_border_color="@color/primary"
-            android:id="@+id/img_routine"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/full_body_stretch"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/change_routine_photo"
-            android:id="@+id/tvCreateRoutine"/>
-
-        <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/routine_name_hint"
-            android:id="@+id/etRoutineName"/>
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:orientation="vertical"
+            >
+            <de.hdodenhof.circleimageview.CircleImageView
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn_background_border"
-            android:text="@string/add_stretch"
-            android:onClick="addStretchOnClick"/>
+                android:layout_width="@dimen/routine_image_w_h"
+                android:layout_height="@dimen/routine_image_w_h"
+                android:layout_margin="@dimen/routine_image_margin"
+                app:civ_border_width="2dp"
+                app:civ_border_color="@color/primary"
+                android:id="@+id/img_routine"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/full_body_stretch"/>
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/lvStretches"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/change_routine_photo"
+                android:id="@+id/tvCreateRoutine"/>
 
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/routine_name_hint"
+                android:id="@+id/etRoutineName"/>
 
-    </LinearLayout>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_background_border"
+                android:text="@string/add_stretch"
+                android:onClick="addStretchOnClick"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lvStretches"
+        android:layout_below="@+id/scrollView"
+        android:layout_above="@+id/ad_layout"/>
 
 
     <include layout="@layout/ad_layout"/>

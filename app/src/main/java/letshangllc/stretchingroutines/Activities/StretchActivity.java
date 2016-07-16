@@ -160,11 +160,14 @@ public class StretchActivity extends AppCompatActivity {
 
         Cursor c = db.rawQuery(sql, null);
 
-        c.moveToFirst();
+
 
         Log.i(TAG, "Query count: "+ c.getCount());
+        int i = 1;
+        c.moveToFirst();
         while(!c.isAfterLast()){
-
+            Log.i(TAG, "Run: " + i++);
+            Log.i(TAG, "Duration index: " + c.getColumnIndex(DBTableConstants.STRETCH_DURATION));
             int duration = c.getInt(c.getColumnIndex(DBTableConstants.STRETCH_DURATION));
             String instruction = c.getString(c.getColumnIndex(DBTableConstants.STRETCH_INSTRUCTION));
             byte[] bytes = c.getBlob(c.getColumnIndex(DBTableConstants.STRETCH_IMAGE));

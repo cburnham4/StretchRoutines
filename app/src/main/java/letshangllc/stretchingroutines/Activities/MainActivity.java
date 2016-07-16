@@ -61,9 +61,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        this.addRoutinesFromDB();
 
 
-        this.runAds();
+        //this.runAds();
 
     }
 

@@ -122,7 +122,7 @@ public class CreateRoutineActivity extends AppCompatActivity {
         int routineId = this.storeRoutine(routineName);
         Log.i(TAG, "Stored routine");
         addStretchesToDatabase(routineId);
-
+        ringProgressDialog.dismiss();
         finish();
     }
 
