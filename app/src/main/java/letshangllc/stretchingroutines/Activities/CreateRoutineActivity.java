@@ -31,6 +31,8 @@ import letshangllc.stretchingroutines.R;
 import letshangllc.stretchingroutines.adapaters.StretchesAdapter;
 import letshangllc.stretchingroutines.dialogs.AddStretchDialog;
 import letshangllc.stretchingroutines.helpers.DbBitmapUtility;
+import letshangllc.stretchingroutines.helpers.StoreRoutineInBackground;
+import letshangllc.stretchingroutines.helpers.StoringRoutineComplete;
 
 public class CreateRoutineActivity extends AppCompatActivity {
     private static final String TAG = CreateRoutineActivity.class.getSimpleName();
@@ -116,14 +118,22 @@ public class CreateRoutineActivity extends AppCompatActivity {
             Toast.makeText(this, "Routine name is empty", Toast.LENGTH_SHORT).show();
             return;
         }
-        ProgressDialog ringProgressDialog = ProgressDialog.show(CreateRoutineActivity.this,
-                "Please wait ...", "Downloading Image ...", true);
+        //ProgressDialog ringProgressDialog = ProgressDialog.show(CreateRoutineActivity.this,
+                //"Please wait ...", "Downloading Image ...", true);
         Log.i(TAG, "Storing data");
         int routineId = this.storeRoutine(routineName);
         Log.i(TAG, "Stored routine");
-        addStretchesToDatabase(routineId);
-        ringProgressDialog.dismiss();
-        finish();
+
+        new StoreRoutineInBackground(stretches, routineId, stretchesDBHelper, this, new StoringRoutineComplete() {
+            @Override
+            public void onDataStored() {
+                Log.i(TAG, "Data stored");
+                finish();
+            }
+        }).execute();
+        //addStretchesToDatabase(routineId);
+        //ringProgressDialog.dismiss();
+
     }
 
     public int storeRoutine(String routineName){
@@ -140,35 +150,7 @@ public class CreateRoutineActivity extends AppCompatActivity {
     }
 
     public void addStretchesToDatabase(int routineId) {
-        /* Add each stretch to the routine */
-        for (Stretch stretch : stretches) {
-            byte[] bytes = null;
-            if (stretch.bitmap != null) {
-                bytes = DbBitmapUtility.getBytes(stretch.bitmap);
-            }
-            SQLiteDatabase db = stretchesDBHelper.getWritableDatabase();
-            /* Insert stretch into db */
-            ContentValues cv = new ContentValues();
-            cv.put(DBTableConstants.STRETCH_NAME, stretch.getName());
-            cv.put(DBTableConstants.STRETCH_IMAGE, bytes);
-            cv.put(DBTableConstants.STRETCH_DURATION, stretch.getTime());
-            cv.put(DBTableConstants.STRETCH_INSTRUCTION, stretch.getInstructions());
-            int stretchId = (int) db.insert(DBTableConstants.STRETCH_TABLE_NAME, null, cv);
 
-            /* TODO check stretch id */
-            db.close();
-
-            db = stretchesDBHelper.getWritableDatabase();
-
-
-            /* Insert routine Id and stretch ID into db */
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(DBTableConstants.ROUTINE_ID, routineId);
-            contentValues.put(DBTableConstants.STRETCH_ID, stretchId);
-            db.insert(DBTableConstants.ROUTINE_STRETCH_TABLE, null, contentValues);
-            db.close();
-        }
-        Log.i(TAG, "Stored stretches");
 
     }
 
