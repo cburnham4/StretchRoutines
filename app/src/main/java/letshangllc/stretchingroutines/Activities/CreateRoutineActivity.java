@@ -140,8 +140,6 @@ public class CreateRoutineActivity extends AppCompatActivity {
     }
 
     public void addStretchesToDatabase(int routineId) {
-
-
         /* Add each stretch to the routine */
         for (Stretch stretch : stretches) {
             byte[] bytes = null;
@@ -155,10 +153,10 @@ public class CreateRoutineActivity extends AppCompatActivity {
             cv.put(DBTableConstants.STRETCH_IMAGE, bytes);
             cv.put(DBTableConstants.STRETCH_DURATION, stretch.getTime());
             cv.put(DBTableConstants.STRETCH_INSTRUCTION, stretch.getInstructions());
-            db.insert(DBTableConstants.STRETCH_TABLE_NAME, null, cv);
+            int stretchId = (int) db.insert(DBTableConstants.STRETCH_TABLE_NAME, null, cv);
 
+            /* TODO check stretch id */
             db.close();
-            int stretchId = getStretchId();
 
             db = stretchesDBHelper.getWritableDatabase();
 

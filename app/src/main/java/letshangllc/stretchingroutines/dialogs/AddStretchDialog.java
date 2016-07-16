@@ -116,13 +116,15 @@ public class AddStretchDialog extends DialogFragment {
                     Bitmap bitmap1 = (Bitmap) MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
                     double width = bitmap1.getWidth()* 1.0;
                     double height = bitmap1.getHeight() * 1.0;
-                    if(width>1024 || height>1024){
+
+                    double largestXY = 256.0;
+                    if(width>largestXY || height>largestXY){
                         if(width>height){
-                            double scale = 1024.0/height;
+                            double scale = largestXY/height;
                             bitmap = Bitmap.createScaledBitmap(bitmap1,(int) (scale*width),
                                     (int)  (height*scale), true);
                         }else{
-                            double scale = 1024.0/width;
+                            double scale = largestXY/width;
                             bitmap = Bitmap.createScaledBitmap(bitmap1,(int) (scale*width),
                                     (int)  (height*scale), true);
                         }
