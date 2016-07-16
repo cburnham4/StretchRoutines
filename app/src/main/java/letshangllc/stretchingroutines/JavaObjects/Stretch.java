@@ -18,6 +18,10 @@ public class Stretch {
         this.name = name;
     }
 
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
+    }
+
     public Bitmap bitmap;
 
     public Stretch(String name, String instructions, int drawableIndex, int time) {

@@ -2,21 +2,25 @@ package letshangllc.stretchingroutines.Activities;
 
 import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.support.design.widget.TextInputEditText;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -30,6 +34,7 @@ import letshangllc.stretchingroutines.JavaObjects.Stretch;
 import letshangllc.stretchingroutines.R;
 import letshangllc.stretchingroutines.adapaters.StretchesAdapter;
 import letshangllc.stretchingroutines.dialogs.AddStretchDialog;
+import letshangllc.stretchingroutines.dialogs.EditStretchDialog;
 import letshangllc.stretchingroutines.helpers.DbBitmapUtility;
 import letshangllc.stretchingroutines.helpers.StoreRoutineInBackground;
 import letshangllc.stretchingroutines.helpers.StoringRoutineComplete;
@@ -78,16 +83,19 @@ public class CreateRoutineActivity extends AppCompatActivity {
         if (toolbar != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+        assert toolbar != null;
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                confirmDiscard();
             }
         });
     }
 
     public void setupViews() {
         lvStretches = (ListView) findViewById(R.id.lvStretches);
+
+        registerForContextMenu(lvStretches);
 
         stretchesAdapter = new StretchesAdapter(this, stretches);
 
@@ -118,8 +126,7 @@ public class CreateRoutineActivity extends AppCompatActivity {
             Toast.makeText(this, "Routine name is empty", Toast.LENGTH_SHORT).show();
             return;
         }
-        //ProgressDialog ringProgressDialog = ProgressDialog.show(CreateRoutineActivity.this,
-                //"Please wait ...", "Downloading Image ...", true);
+
         Log.i(TAG, "Storing data");
         int routineId = this.storeRoutine(routineName);
         Log.i(TAG, "Stored routine");
@@ -131,8 +138,6 @@ public class CreateRoutineActivity extends AppCompatActivity {
                 finish();
             }
         }).execute();
-        //addStretchesToDatabase(routineId);
-        //ringProgressDialog.dismiss();
 
     }
 
@@ -147,28 +152,6 @@ public class CreateRoutineActivity extends AppCompatActivity {
         db.close();
 
         return routineId;
-    }
-
-    public void addStretchesToDatabase(int routineId) {
-
-
-    }
-
-    public int getStretchId(){
-        SQLiteDatabase db = stretchesDBHelper.getReadableDatabase();
-
-        String sql = "SELECT MAX("+ DBTableConstants.STRETCH_ID +") " +
-                "FROM " + DBTableConstants.STRETCH_TABLE_NAME;
-        Cursor c = db.rawQuery(sql, null);
-
-        c.moveToFirst();
-
-        int id = c.getInt(0);
-
-        c.close();
-
-        db.close();
-        return id;
     }
 
     @Override
@@ -190,7 +173,68 @@ public class CreateRoutineActivity extends AppCompatActivity {
         }
     }
 
-    /* todo confirmation cancel alert box */
+    private void confirmDiscard(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Discard Routine?");
+
+        builder.setPositiveButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                /* Finish the exercise upon discarding */
+                finish();
+            }
+        }).setNegativeButton(R.string.discard, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_delete_edit, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch (item.getItemId()) {
+            case R.id.edit:
+                editStretch(stretches.get((int) info.id));
+                return true;
+            case R.id.delete:
+                stretches.remove((int) info.id);
+                stretchesAdapter.notifyDataSetChanged();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
+    public void editStretch(final Stretch stretch){
+        EditStretchDialog editStretchDialog  = new EditStretchDialog();
+        editStretchDialog.setCurrentStretch(stretch);
+
+        editStretchDialog.setCallback(new EditStretchDialog.Listener() {
+            @Override
+            public void onDialogPositiveClick(String name, int duration, String description, Bitmap bitmap) {
+                stretch.setName(name);
+                stretch.setTime(duration);
+                stretch.setInstructions(description);
+                stretch.setBitmap(bitmap);
+                stretchesAdapter.notifyDataSetChanged();
+            }
+        });
+        editStretchDialog.show(getSupportFragmentManager(), TAG);
+    }
+
+
 
 
 }

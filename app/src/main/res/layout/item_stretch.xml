@@ -2,13 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/stretch_item_height">
+    android:layout_height="@dimen/stretch_item_height"
+    >
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="@dimen/routine_image_dimen"
         android:layout_height="@dimen/routine_image_dimen"
         android:padding="@dimen/routine_image_margin"
-        app:civ_border_width="2dp"
+        app:civ_border_width="1dp"
         app:civ_border_color="@color/primary"
         android:id="@+id/img_stretch"
         android:layout_centerVertical="true" />
