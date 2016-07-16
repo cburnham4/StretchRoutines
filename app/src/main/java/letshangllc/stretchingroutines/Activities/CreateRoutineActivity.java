@@ -132,28 +132,11 @@ public class CreateRoutineActivity extends AppCompatActivity {
         ContentValues cv = new ContentValues();
         cv.put(DBTableConstants.ROUTINE_NAME, routineName);
 
-        db.insert(DBTableConstants.ROUTINE_TABLE_NAME, null, cv);
-
+        int routineId = (int) db.insert(DBTableConstants.ROUTINE_TABLE_NAME, null, cv);
+        Log.i(TAG, "Routine ID: " + routineId);
         db.close();
 
-        return this.getRoutineId();
-    }
-
-    public int getRoutineId(){
-        SQLiteDatabase db = stretchesDBHelper.getReadableDatabase();
-
-        String sql = "SELECT MAX("+ DBTableConstants.ROUTINE_ID +") " +
-                "FROM " + DBTableConstants.ROUTINE_TABLE_NAME;
-        Cursor c = db.rawQuery(sql, null);
-
-        c.moveToFirst();
-
-        int id = c.getInt(0);
-
-        c.close();
-        db.close();
-
-        return id;
+        return routineId;
     }
 
     public void addStretchesToDatabase(int routineId) {
