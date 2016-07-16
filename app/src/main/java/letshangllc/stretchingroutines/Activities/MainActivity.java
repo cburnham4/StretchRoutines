@@ -40,30 +40,6 @@ public class MainActivity extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.lv_routines);
 
-        final Routines routines = new Routines();
-        routineItems = routines.getRoutines();
-
-        routineListAdapter = new RoutineListAdapter(this, routineItems);
-
-        listView.setAdapter(routineListAdapter);
-        //addRoutinesFromDB();
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                /* When a day is selected go to the Lifts Activity */
-                Log.i(TAG, "Item Clicked");
-                Intent intent = new Intent(MainActivity.this, StretchActivity.class);
-
-                RoutineItem item = routineListAdapter.getItem(position);
-
-                intent.putExtra(getString(R.string.routine_index_intent), item.id);
-                startActivity(intent);
-            }
-        });
-        this.addRoutinesFromDB();
-
-
         //this.runAds();
 
     }
@@ -104,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /* ADS */
     private AdsHelper adsHelper;
     private Handler handler = new Handler();
 
@@ -124,4 +101,32 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(runnable, 100);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        final Routines routines = new Routines();
+        routineItems = routines.getRoutines();
+
+        routineListAdapter = new RoutineListAdapter(this, routineItems);
+
+        listView.setAdapter(routineListAdapter);
+        //addRoutinesFromDB();
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+                /* When a day is selected go to the Lifts Activity */
+                Log.i(TAG, "Item Clicked");
+                Intent intent = new Intent(MainActivity.this, StretchActivity.class);
+
+                RoutineItem item = routineListAdapter.getItem(position);
+
+                intent.putExtra(getString(R.string.routine_index_intent), item.id);
+                startActivity(intent);
+            }
+        });
+        this.addRoutinesFromDB();
+
+    }
 }
