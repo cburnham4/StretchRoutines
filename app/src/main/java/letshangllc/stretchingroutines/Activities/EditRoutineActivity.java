@@ -80,7 +80,7 @@ public class EditRoutineActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        setTitle("Create Routine");
+        setTitle("Edit Routine");
 
         this.getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_clear_black_24dp);
         if (toolbar != null) {
@@ -108,6 +108,7 @@ public class EditRoutineActivity extends AppCompatActivity {
     }
 
     public void getStretches(){
+        stretches = new ArrayList<>();
         SQLiteDatabase db = stretchesDBHelper.getReadableDatabase();
          /* Query the db to get the muscle data */
 

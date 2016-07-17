@@ -74,6 +74,7 @@ public class UpdateRoutineInBackground extends AsyncTask<Void, Void, Void> {
             cv.put(DBTableConstants.STRETCH_IMAGE, bytes);
             cv.put(DBTableConstants.STRETCH_DURATION, stretch.getDuration());
             cv.put(DBTableConstants.STRETCH_INSTRUCTION, stretch.getInstructions());
+            db.insertWithOnConflict(DBTableConstants.STRETCH_TABLE_NAME, null, cv, SQLiteDatabase.CONFLICT_REPLACE)
             db.update(DBTableConstants.STRETCH_TABLE_NAME, cv,
                     DBTableConstants.STRETCH_ID + " = " + stretch.id, null);
         }

@@ -85,32 +85,41 @@ public class EditStretchDialog extends DialogFragment {
         });
 
 
+
         builder.setView(view)
                 // Add action buttons
-                .setPositiveButton(R.string.edit, new DialogInterface.OnClickListener() {
-                    @Override
+                .setPositiveButton(R.string.add, null)
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        EditStretchDialog.this.getDialog().cancel();
+                    }
+                });
+
+        final AlertDialog dialog = builder.create();
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                Button b = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                b.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View view) {
                         String durationString = etDuration.getText().toString();
                         String description = etDescription.getText().toString();
                         String name = etName.getText().toString();
                         if(!(durationString.isEmpty() || description.isEmpty() || name.isEmpty())){
                             int duration = Integer.parseInt(durationString);
                             mListener.onDialogPositiveClick(name, duration, description, bitmap);
+                            dialog.dismiss();
                         }else{
                             Toast.makeText(getContext(), "One or more fields left blank", Toast.LENGTH_SHORT).show();
-
                         }
-
-
-
-                    }
-                })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        EditStretchDialog.this.getDialog().cancel();
                     }
                 });
-        return builder.create();
+            }
+        });
+
+        return dialog;
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

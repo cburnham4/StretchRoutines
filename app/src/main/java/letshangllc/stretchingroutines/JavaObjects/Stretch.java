@@ -16,7 +16,6 @@ public class Stretch {
     public Stretch(String name, String instructions, int duration, Bitmap bitmap, int id) {
         this.name = name;
         this.instructions = instructions;
-        this.drawableIndex = drawableIndex;
         this.duration = duration;
         this.bitmap = bitmap;
         this.id = id;
