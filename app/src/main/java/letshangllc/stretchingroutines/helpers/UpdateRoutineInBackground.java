@@ -70,13 +70,26 @@ public class UpdateRoutineInBackground extends AsyncTask<Void, Void, Void> {
             SQLiteDatabase db = stretchesDBHelper.getWritableDatabase();
             /* Insert stretch into db */
             ContentValues cv = new ContentValues();
+
+            /* Check on the stretch id */
+            cv.put(DBTableConstants.STRETCH_ID, stretch.id);
             cv.put(DBTableConstants.STRETCH_NAME, stretch.getName());
             cv.put(DBTableConstants.STRETCH_IMAGE, bytes);
             cv.put(DBTableConstants.STRETCH_DURATION, stretch.getDuration());
             cv.put(DBTableConstants.STRETCH_INSTRUCTION, stretch.getInstructions());
-            db.insertWithOnConflict(DBTableConstants.STRETCH_TABLE_NAME, null, cv, SQLiteDatabase.CONFLICT_REPLACE)
-            db.update(DBTableConstants.STRETCH_TABLE_NAME, cv,
-                    DBTableConstants.STRETCH_ID + " = " + stretch.id, null);
+            int stretchId = (int) db.insertWithOnConflict(DBTableConstants.STRETCH_TABLE_NAME, null, cv, SQLiteDatabase.CONFLICT_REPLACE);
+
+            /* TODO check stretch id */
+            db.close();
+
+            db = stretchesDBHelper.getWritableDatabase();
+
+            /* Insert routine Id and stretch ID into db */
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(DBTableConstants.ROUTINE_ID, routineId);
+            contentValues.put(DBTableConstants.STRETCH_ID, stretchId);
+            db.insertWithOnConflict(DBTableConstants.ROUTINE_STRETCH_TABLE, null, contentValues, SQLiteDatabase.CONFLICT_REPLACE);
+            db.close();
         }
         Log.i(TAG, "Stored stretches");
         return null;

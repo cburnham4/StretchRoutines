@@ -164,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, EditRoutineActivity.class);
 
         intent.putExtra(getString(R.string.routine_index_intent), routineItem.id);
+        intent.putExtra(getString(R.string.routine_name_extra), routineItem.getName());
         startActivity(intent);
     }
 

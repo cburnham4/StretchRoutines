@@ -32,7 +32,7 @@ public class StretchesDBHelper extends SQLiteOpenHelper {
     private static final String ROUTINE_STRETCH_TABLE_CREATE =
             "CREATE TABLE "+  DBTableConstants.ROUTINE_STRETCH_TABLE +" ("
                     + DBTableConstants.ROUTINE_ID + " integer, "
-                    + DBTableConstants.STRETCH_ID +"  integer "
+                    + DBTableConstants.STRETCH_ID +"  integer primary key"
                     + ")";
 
     public StretchesDBHelper(Context context) {

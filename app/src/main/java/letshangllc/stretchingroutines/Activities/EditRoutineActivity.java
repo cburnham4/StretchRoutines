@@ -56,7 +56,8 @@ public class EditRoutineActivity extends AppCompatActivity {
     /* Progress Dialog */
     private ProgressDialog progressDialog;
 
-    /* Routine Id */
+    /* Routine */
+    private String routineName;
     private int routineId;
 
 
@@ -69,6 +70,7 @@ public class EditRoutineActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         routineId = intent.getIntExtra(getString(R.string.routine_index_intent), 0);
+        routineName = intent.getStringExtra(getString(R.string.routine_name_extra));
 
         stretchesDBHelper = new StretchesDBHelper(this);
 
@@ -105,6 +107,7 @@ public class EditRoutineActivity extends AppCompatActivity {
         lvStretches.setAdapter(stretchesAdapter);
 
         etRoutineName = (EditText) findViewById(R.id.etRoutineName);
+        etRoutineName.setText(routineName);
     }
 
     public void getStretches(){
