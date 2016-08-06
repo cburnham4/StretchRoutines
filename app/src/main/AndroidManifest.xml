@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme">
-        <activity android:name=".Activities.MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,10 +22,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.StretchActivity"
+            android:name=".activities.StretchActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
-        <activity android:name=".Activities.CreateRoutineActivity"></activity>
-        <activity android:name=".Activities.EditRoutineActivity"></activity>
+        <activity android:name=".activities.CreateRoutineActivity"></activity>
+        <activity android:name=".activities.EditRoutineActivity"></activity>
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

@@ -1,4 +1,4 @@
-package letshangllc.stretchingroutines.Activities;
+package letshangllc.stretchingroutines.activities;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -202,7 +202,7 @@ public class StretchActivity extends AppCompatActivity {
         try {
             /* Play the alarm */
             r = RingtoneManager.getRingtone(this, alert);
-            r.setStreamType(AudioManager.STREAM_ALARM);
+            //r.setStreamType(AudioManager.STREAM_ALARM);
             r.play();
         }catch (Exception e) {
             e.printStackTrace();

@@ -8,7 +8,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/btnCreateRoutine"
+        android:layout_above="@+id/ad_layout"
+        android:layout_alignParentTop="true"
         android:orientation="vertical">
 
         <ImageView
@@ -54,6 +55,7 @@
         android:id="@+id/btnCreateRoutine"
         android:onClick="createRoutineOnClick"
         android:background="@drawable/btn_background_border"
+        android:visibility="gone"
         android:text="@string/create_custom_routine"/>
 
 

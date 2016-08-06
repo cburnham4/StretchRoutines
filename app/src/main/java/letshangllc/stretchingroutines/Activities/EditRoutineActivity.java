@@ -1,4 +1,4 @@
-package letshangllc.stretchingroutines.Activities;
+package letshangllc.stretchingroutines.activities;
 
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -32,7 +32,6 @@ import letshangllc.stretchingroutines.adapaters.StretchesAdapter;
 import letshangllc.stretchingroutines.dialogs.AddStretchDialog;
 import letshangllc.stretchingroutines.dialogs.EditStretchDialog;
 import letshangllc.stretchingroutines.helpers.DbBitmapUtility;
-import letshangllc.stretchingroutines.helpers.StoreRoutineInBackground;
 import letshangllc.stretchingroutines.helpers.StoringRoutineComplete;
 import letshangllc.stretchingroutines.helpers.UpdateRoutineInBackground;
 
@@ -225,18 +224,18 @@ public class EditRoutineActivity extends AppCompatActivity {
 
     private void confirmDiscard(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Discard Routine?");
+        builder.setTitle("Discard Edits?");
 
         builder.setPositiveButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 /* Finish the exercise upon discarding */
-                finish();
+                dialog.cancel();
             }
         }).setNegativeButton(R.string.discard, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
+                finish();
             }
         });
         AlertDialog alertDialog = builder.create();

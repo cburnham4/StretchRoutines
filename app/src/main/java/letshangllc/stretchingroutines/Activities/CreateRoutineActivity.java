@@ -1,4 +1,4 @@
-package letshangllc.stretchingroutines.Activities;
+package letshangllc.stretchingroutines.activities;
 
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -174,12 +174,12 @@ public class CreateRoutineActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 /* Finish the exercise upon discarding */
-                finish();
+                dialog.cancel();
             }
         }).setNegativeButton(R.string.discard, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
+                finish();
             }
         });
         AlertDialog alertDialog = builder.create();
