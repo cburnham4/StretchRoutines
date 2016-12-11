@@ -21,9 +21,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import letshangllc.stretchingroutines.AdsHelper;
-import letshangllc.stretchingroutines.Data.DBTableConstants;
 import letshangllc.stretchingroutines.Data.Routines;
-import letshangllc.stretchingroutines.Data.StretchesDBHelper;
 import letshangllc.stretchingroutines.R;
 import letshangllc.stretchingroutines.JavaObjects.RoutineItem;
 import letshangllc.stretchingroutines.adapaters.RoutineListAdapter;
@@ -36,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<RoutineItem> routineItems;
     private RoutineListAdapter routineListAdapter;
 
+    /* TODO: Add in between time */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,41 +46,38 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void addRoutinesFromDB(){
-        StretchesDBHelper stretchesDBHelper = new StretchesDBHelper(this);
-        SQLiteDatabase sqLiteDatabase = stretchesDBHelper.getReadableDatabase();
+//    public void addRoutinesFromDB(){
+//        StretchesDBHelper stretchesDBHelper = new StretchesDBHelper(this);
+//        SQLiteDatabase sqLiteDatabase = stretchesDBHelper.getReadableDatabase();
+//
+//        String[] projection = {DBTableConstants.ROUTINE_NAME, DBTableConstants.ROUTINE_IMAGE,
+//            DBTableConstants.ROUTINE_ID
+//        };
+//
+//        Cursor c = sqLiteDatabase.query(DBTableConstants.ROUTINE_TABLE_NAME, projection, null,
+//                null, null, null, null);
+//        c.moveToFirst();
+//
+//        while(!c.isAfterLast()){
+//            String routineName = c.getString(0);
+//            Log.i(TAG, routineName);
+//            byte[] bytes = c.getBlob(1);
+//
+//            int id = c.getInt(2);
+//            if(bytes == null){
+//                routineItems.add(new RoutineItem(id,R.drawable.silhouette, routineName));
+//            }else{
+//                Bitmap bitmap = DbBitmapUtility.getImage(bytes);
+//                routineItems.add(new RoutineItem(id, bitmap, routineName));
+//            }
+//            c.moveToNext();
+//        }
+//        routineListAdapter.notifyDataSetChanged();;
+//        c.close();
+//        sqLiteDatabase.close();
+//    }
 
-        String[] projection = {DBTableConstants.ROUTINE_NAME, DBTableConstants.ROUTINE_IMAGE,
-            DBTableConstants.ROUTINE_ID
-        };
 
-        Cursor c = sqLiteDatabase.query(DBTableConstants.ROUTINE_TABLE_NAME, projection, null,
-                null, null, null, null);
-        c.moveToFirst();
-
-        while(!c.isAfterLast()){
-            String routineName = c.getString(0);
-            Log.i(TAG, routineName);
-            byte[] bytes = c.getBlob(1);
-
-            int id = c.getInt(2);
-            if(bytes == null){
-                routineItems.add(new RoutineItem(id,R.drawable.silhouette, routineName));
-            }else{
-                Bitmap bitmap = DbBitmapUtility.getImage(bytes);
-                routineItems.add(new RoutineItem(id, bitmap, routineName));
-            }
-            c.moveToNext();
-        }
-        routineListAdapter.notifyDataSetChanged();;
-        c.close();
-        sqLiteDatabase.close();
-    }
-
-    public void createRoutineOnClick(View view){
-        Intent intent = new Intent(this, CreateRoutineActivity.class);
-        startActivity(intent);
-    }
 
     /* ADS */
     private AdsHelper adsHelper;
@@ -130,8 +126,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        this.addRoutinesFromDB();
-
     }
 
     @Override
@@ -146,63 +140,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         switch (item.getItemId()) {
-            case R.id.edit:
-                editRoutine(routineItems.get((int) info.id));
-                return true;
-            case R.id.delete:
-                confirmDelete(routineItems.get((int) info.id));
-                return true;
             default:
                 return super.onContextItemSelected(item);
         }
     }
 
-    private void editRoutine(RoutineItem routineItem){
-        Intent intent = new Intent(MainActivity.this, EditRoutineActivity.class);
+//
 
-        intent.putExtra(getString(R.string.routine_index_intent), routineItem.id);
-        intent.putExtra(getString(R.string.routine_name_extra), routineItem.getName());
-        startActivity(intent);
-    }
 
-    private void confirmDelete(final RoutineItem routineItem){
-        if(routineItem.id > 9900){
-            Toast.makeText(this, "You cannot delete this routine", Toast.LENGTH_LONG).show();
-            return;
-        }
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(getString(R.string.delete_confirm));
-
-        builder.setPositiveButton(getString(R.string.delete), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                deleteRoutine(routineItem);
-            }
-        }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-    }
-
-    private void deleteRoutine(RoutineItem routineItem){
-        StretchesDBHelper dbHelper = new StretchesDBHelper(this);
-        int routineId = routineItem.id;
-
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-        /* Delete from Exercise table and routines table by using exercise id */
-        db.delete(DBTableConstants.ROUTINE_STRETCH_TABLE, DBTableConstants.ROUTINE_ID + " = " + routineId, null);
-        db.delete(DBTableConstants.ROUTINE_TABLE_NAME, DBTableConstants.ROUTINE_ID + " = " + routineId, null);
-
-        db.close();
-
-        /* Remove item from list and update list view */
-        routineItems.remove(routineItem);
-        routineListAdapter.notifyDataSetChanged();
-    }
 }

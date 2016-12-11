@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
-import android.media.AudioManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -23,9 +22,7 @@ import java.util.Arrays;
 import java.util.Locale;
 
 import letshangllc.stretchingroutines.AdsHelper;
-import letshangllc.stretchingroutines.Data.DBTableConstants;
 import letshangllc.stretchingroutines.Data.RoutineStretches;
-import letshangllc.stretchingroutines.Data.StretchesDBHelper;
 import letshangllc.stretchingroutines.JavaObjects.Stretch;
 import letshangllc.stretchingroutines.R;
 import letshangllc.stretchingroutines.helpers.DbBitmapUtility;
@@ -75,9 +72,6 @@ public class StretchActivity extends AppCompatActivity {
                 stretches = new ArrayList<>();
         }
 
-        getStretches(routineId);
-
-
         this.findViews();
         currentStretch = 0;
 
@@ -95,7 +89,7 @@ public class StretchActivity extends AppCompatActivity {
     }
 
     private void startStretches(){
-        if(currentStretch == stretches.size()){
+        if(currentStretch >= stretches.size()){
             finish();
             return;
         }
@@ -114,17 +108,34 @@ public class StretchActivity extends AppCompatActivity {
 
 
         //tv_timer.setText(stretch.getDuration() +"");
-        startCountdown(stretch.getDuration()*1000);
+        startSwitchCountdown(stretch.getDuration()*1000);
     }
 
+    /* TODO: Countdown to next exercise */
     public void nextExerciseOnClick(View view){
         countDownTimer.cancel();
         currentStretch++;
         startStretches();
     }
 
-    private void startCountdown(int timer){
-        countDownTimer = new CountDownTimer(timer, 500) {
+    private void startSwitchCountdown(final int stretchDuration){
+        countDownTimer = new CountDownTimer(5000, 250) {
+
+            public void onTick(long millisUntilFinished) {
+                int time = (int) Math.round(Math.ceil(millisUntilFinished * 0.001f));
+                Log.i(TAG, String.format(Locale.getDefault(), "%d" , time));
+                tv_timer.setText(String.format(Locale.getDefault(), "%d" ,time));
+            }
+
+            public void onFinish() {
+                startStretchCountdown(stretchDuration);
+            }
+        };
+        countDownTimer.start();
+    }
+
+    private void startStretchCountdown(int stretchDuration){
+        countDownTimer = new CountDownTimer(stretchDuration, 250) {
 
             public void onTick(long millisUntilFinished) {
                 int time = Math.round(millisUntilFinished * 0.001f);
@@ -142,47 +153,7 @@ public class StretchActivity extends AppCompatActivity {
         countDownTimer.start();
     }
 
-    public void getStretches(int routineId){
-        StretchesDBHelper stretchesDBHelper = new StretchesDBHelper(this);
-        SQLiteDatabase db = stretchesDBHelper.getReadableDatabase();
-         /* Query the db to get the muscle data */
-
-        String sql = "SELECT *" +
-                " FROM " + DBTableConstants.STRETCH_TABLE_NAME +
-                " INNER JOIN " + DBTableConstants.ROUTINE_STRETCH_TABLE +
-                " ON " + DBTableConstants.STRETCH_TABLE_NAME + "." + DBTableConstants.STRETCH_ID +
-                " = " + DBTableConstants.ROUTINE_STRETCH_TABLE + "." + DBTableConstants.STRETCH_ID +
-                " WHERE " + DBTableConstants.ROUTINE_STRETCH_TABLE + "." + DBTableConstants.ROUTINE_ID +
-                " = " + routineId;
-
-
-        Cursor c = db.rawQuery(sql, null);
-
-
-
-        Log.i(TAG, "Query count: "+ c.getCount());
-        int i = 1;
-        c.moveToFirst();
-        while(!c.isAfterLast()){
-            Log.i(TAG, "Run: " + i++);
-            Log.i(TAG, "Duration index: " + c.getColumnIndex(DBTableConstants.STRETCH_DURATION));
-            int duration = c.getInt(c.getColumnIndex(DBTableConstants.STRETCH_DURATION));
-            String instruction = c.getString(c.getColumnIndex(DBTableConstants.STRETCH_INSTRUCTION));
-            byte[] bytes = c.getBlob(c.getColumnIndex(DBTableConstants.STRETCH_IMAGE));
-            String name = c.getString(c.getColumnIndex(DBTableConstants.STRETCH_NAME));
-            if(bytes == null){
-                stretches.add(new Stretch(name, instruction, duration));
-            }else{
-                Bitmap bitmap = DbBitmapUtility.getImage(bytes);
-                stretches.add(new Stretch(name, instruction, bitmap, duration));
-            }
-
-            c.moveToNext();
-        }
-
-        c.close();
-        db.close();
-    }
+//
 
     private void playAlarm(){
         /* Get the alarm tone */

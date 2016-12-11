@@ -8,8 +8,8 @@ android {
         applicationId "letshangllc.stretchingroutines"
         minSdkVersion 16
         targetSdkVersion 24
-        versionCode 11
-        versionName "1.5"
+        versionCode 13
+        versionName "1.7"
     }
     buildTypes {
         release {
