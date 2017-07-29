@@ -55,7 +55,7 @@ public class StretchesAdapter extends ArrayAdapter<Stretch> {
         }
 
         viewHolder.tvName.setText(item.getName());
-        viewHolder.tvDuration.setText(String.format(Locale.US, "%d s", item.getDuration()));
+        viewHolder.tvDuration.setText(String.format(Locale.US, "%d s", item.time));
         viewHolder.tvInstruction.setText(item.getInstructions());
 
 

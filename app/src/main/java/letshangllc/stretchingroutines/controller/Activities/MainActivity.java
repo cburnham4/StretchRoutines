@@ -1,5 +1,6 @@
 package letshangllc.stretchingroutines.controller.Activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -28,9 +29,9 @@ public class MainActivity extends AppCompatActivity {
     private String TAG = MainActivity.class.getSimpleName();
 
     private ListView listView;
-    //private ArrayList<RoutineItem> routineItems;
     private ArrayList<Routine> routines;
     private RoutineListAdapter routineListAdapter;
+    private ProgressDialog progressDialog;
 
     /* TODO: Add in between time */
     @Override
@@ -44,11 +45,12 @@ public class MainActivity extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.lv_routines);
         registerForContextMenu(listView);
-        //this.runAds();
+        this.runAds();
 
     }
 
     public void getRoutines(){
+        progressDialog = ProgressDialog.show(this, "", "Loading Routines...", true);
         APIRequests.getRoutines(new APIRequests.RoutineListener() {
             @Override
             public void success(ArrayList<Routine> routines) {
@@ -74,10 +76,11 @@ public class MainActivity extends AppCompatActivity {
 
                 Routine item = routineListAdapter.getItem(position);
 
-                intent.putExtra(getString(R.string.routine_index_intent), item.name);
+                intent.putExtra(getString(R.string.routine_index_intent), item);
                 startActivity(intent);
             }
         });
+        progressDialog.dismiss();
     }
 
 

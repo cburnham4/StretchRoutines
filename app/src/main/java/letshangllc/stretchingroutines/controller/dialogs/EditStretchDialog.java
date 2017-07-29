@@ -65,7 +65,7 @@ public class EditStretchDialog extends DialogFragment {
         tvPhotoUploaded = (TextView) view.findViewById(R.id.tvPhotoUploaded);
         Button btnUpload = (Button) view.findViewById(R.id.btnUpload);
 
-        etDuration.setText(String.format(Locale.getDefault(), "%d", currentStretch.getDuration()));
+        etDuration.setText(String.format(Locale.getDefault(), "%d", currentStretch.time));
         etDescription.setText(currentStretch.getInstructions());
         etName.setText(currentStretch.getName());
 

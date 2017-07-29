@@ -1,5 +1,6 @@
 package letshangllc.stretchingroutines.controller.Activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -14,14 +15,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 
 import letshangllc.stretchingroutines.AdsHelper;
+import letshangllc.stretchingroutines.model.Data.Routine;
 import letshangllc.stretchingroutines.model.Data.RoutineStretches;
 import letshangllc.stretchingroutines.model.JavaObjects.Stretch;
 import letshangllc.stretchingroutines.R;
+import letshangllc.stretchingroutines.model.api.APIRequests;
 
 public class StretchActivity extends AppCompatActivity {
     private static final String TAG = StretchActivity.class.getSimpleName();
@@ -34,7 +39,7 @@ public class StretchActivity extends AppCompatActivity {
 
     private CountDownTimer countDownTimer;
 
-
+    private ProgressDialog progressDialog;
     /* Alarm */
     private Ringtone r;
 
@@ -44,37 +49,31 @@ public class StretchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stretch);
 
+        /* Load stretches */
         Intent intent = getIntent();
-        int routineId = intent.getIntExtra(getString(R.string.routine_index_intent), 0);
-
-        /* todo Add routine index */
-        switch (routineId){
-            case 99999:
-                stretches = new ArrayList<>(Arrays.asList(RoutineStretches.backStretches));
-                break;
-            case 99998:
-                stretches = new ArrayList<>(Arrays.asList(RoutineStretches.morningStretches));
-                break;
-            case 99997:
-                stretches = new ArrayList<>(Arrays.asList(RoutineStretches.fullBodyStretches));
-                break;
-            case 99996:
-                stretches = new ArrayList<>(Arrays.asList(RoutineStretches.legStretches));
-                break;
-            case 99995:
-                stretches = new ArrayList<>(Arrays.asList(RoutineStretches.beforeBedStretches));
-                break;
-            default:
-                stretches = new ArrayList<>();
-        }
+        Routine routine = intent.getParcelableExtra(getString(R.string.routine_index_intent));
+        loadStretches(routine);
 
         this.findViews();
         currentStretch = 0;
 
 
-        startStretches();
+
 
         this.runAds();
+    }
+
+    private void loadStretches(Routine routine){
+        progressDialog = ProgressDialog.show(this, "Loading Stretches", "Please wait...", true);
+        APIRequests.getStretches(routine, new APIRequests.StretchListener() {
+            @Override
+            public void success(ArrayList<Stretch> stretches) {
+                StretchActivity.this.stretches = stretches;
+                progressDialog.dismiss();
+                startStretches();
+            }
+
+        });
     }
 
     private void findViews(){
@@ -92,19 +91,21 @@ public class StretchActivity extends AppCompatActivity {
         Stretch stretch = stretches.get(currentStretch);
         tv_stretchName.setText(stretch.getName());
         tv_instructions.setText(stretch.getInstructions());
-        if(stretch.bitmap != null){
-            img_stretch.setVisibility(View.VISIBLE);
-            img_stretch.setImageBitmap(stretch.bitmap);
-        }else if(stretch.getDrawableIndex() == 0){
-            img_stretch.setVisibility(View.INVISIBLE);
-        }else{
-            img_stretch.setVisibility(View.VISIBLE);
-            img_stretch.setImageDrawable(ContextCompat.getDrawable(this, stretch.getDrawableIndex()));
-        }
+
+        Glide.with(this).load(stretch.downloadURL).into(img_stretch);
+//        if(stretch.bitmap != null){
+//            img_stretch.setVisibility(View.VISIBLE);
+//            img_stretch.setImageBitmap(stretch.bitmap);
+//        }else if(stretch.getDrawableIndex() == 0){
+//            img_stretch.setVisibility(View.INVISIBLE);
+//        }else{
+//            img_stretch.setVisibility(View.VISIBLE);
+//            img_stretch.setImageDrawable(ContextCompat.getDrawable(this, stretch.getDrawableIndex()));
+//        }
 
 
         //tv_timer.setText(stretch.getDuration() +"");
-        startSwitchCountdown(stretch.getDuration()*1000);
+        startSwitchCountdown(stretch.time*1000);
     }
 
     /* TODO: Countdown to next exercise */
@@ -115,7 +116,7 @@ public class StretchActivity extends AppCompatActivity {
     }
 
     private void startSwitchCountdown(final int stretchDuration){
-        countDownTimer = new CountDownTimer(5000, 250) {
+        countDownTimer = new CountDownTimer(3000, 250) {
 
             public void onTick(long millisUntilFinished) {
                 int time = (int) Math.round(Math.ceil(millisUntilFinished * 0.001f));
