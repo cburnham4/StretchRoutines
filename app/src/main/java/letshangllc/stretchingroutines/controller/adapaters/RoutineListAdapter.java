@@ -9,16 +9,19 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import letshangllc.stretchingroutines.model.Data.Routine;
 import letshangllc.stretchingroutines.model.JavaObjects.RoutineItem;
 import letshangllc.stretchingroutines.R;
 
 /**
  * Created by cvburnha on 4/12/2016.
  */
-public class RoutineListAdapter extends ArrayAdapter<RoutineItem> {
+public class RoutineListAdapter extends ArrayAdapter<Routine> {
 
     private static class ViewHolder {
         CircleImageView routineImg;
@@ -26,15 +29,17 @@ public class RoutineListAdapter extends ArrayAdapter<RoutineItem> {
 
     }
 
-    public RoutineListAdapter(Context context, ArrayList<RoutineItem> items) {
-        super(context, R.layout.item_routine, items);
+    private Context context;
 
+    public RoutineListAdapter(Context context, ArrayList<Routine> items) {
+        super(context, R.layout.item_routine, items);
+        this.context = context;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        RoutineItem item = getItem(position);
+        Routine item = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         ViewHolder viewHolder; // view lookup cache stored in tag
         if (convertView == null) {
@@ -49,13 +54,9 @@ public class RoutineListAdapter extends ArrayAdapter<RoutineItem> {
         }
         // Populate the data into the template view using the data object
 
-        if(item.icon == null){
-            viewHolder.routineImg.setImageDrawable(ContextCompat.getDrawable(getContext(), item.getRoutineIconIndex()));
-        }else{
-            viewHolder.routineImg.setImageBitmap(item.icon);
-        }
+        Glide.with(context).load(item.downloadURL).into(viewHolder.routineImg);
 
-        viewHolder.routineName.setText(item.getName());
+        viewHolder.routineName.setText(item.name);
 
 
         // Return the completed view to render on screen

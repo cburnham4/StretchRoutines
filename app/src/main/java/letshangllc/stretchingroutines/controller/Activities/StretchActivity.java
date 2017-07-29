@@ -1,4 +1,4 @@
-package letshangllc.stretchingroutines.activities;
+package letshangllc.stretchingroutines.controller.Activities;
 
 import android.content.Intent;
 import android.media.Ringtone;

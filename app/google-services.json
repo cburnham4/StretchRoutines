@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "280000227250",
+    "firebase_url": "https://lets-stretch.firebaseio.com",
+    "project_id": "lets-stretch",
+    "storage_bucket": "lets-stretch.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:280000227250:android:110c37571576d6c3",
+        "android_client_info": {
+          "package_name": "letshangllc.stretchingroutines"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "280000227250-eptit5juc3hh14ef6jp70ebj22bphq3h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8N703JBbxmWDr_P-HaKFjAtdavJDOUAk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

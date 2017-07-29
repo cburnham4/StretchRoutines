@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme">
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".controller.Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.StretchActivity"
+            android:name=".controller.Activities.StretchActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
 
         <meta-data
