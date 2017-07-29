@@ -1,9 +1,6 @@
 package letshangllc.stretchingroutines.activities;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -22,10 +19,9 @@ import java.util.Arrays;
 import java.util.Locale;
 
 import letshangllc.stretchingroutines.AdsHelper;
-import letshangllc.stretchingroutines.Data.RoutineStretches;
-import letshangllc.stretchingroutines.JavaObjects.Stretch;
+import letshangllc.stretchingroutines.model.Data.RoutineStretches;
+import letshangllc.stretchingroutines.model.JavaObjects.Stretch;
 import letshangllc.stretchingroutines.R;
-import letshangllc.stretchingroutines.helpers.DbBitmapUtility;
 
 public class StretchActivity extends AppCompatActivity {
     private static final String TAG = StretchActivity.class.getSimpleName();

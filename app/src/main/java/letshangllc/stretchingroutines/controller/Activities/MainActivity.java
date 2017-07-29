@@ -1,12 +1,7 @@
 package letshangllc.stretchingroutines.activities;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
 import android.os.Handler;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,16 +11,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import letshangllc.stretchingroutines.AdsHelper;
-import letshangllc.stretchingroutines.Data.Routines;
+import letshangllc.stretchingroutines.model.Data.Routines;
 import letshangllc.stretchingroutines.R;
-import letshangllc.stretchingroutines.JavaObjects.RoutineItem;
-import letshangllc.stretchingroutines.adapaters.RoutineListAdapter;
-import letshangllc.stretchingroutines.helpers.DbBitmapUtility;
+import letshangllc.stretchingroutines.model.JavaObjects.RoutineItem;
+import letshangllc.stretchingroutines.controller.adapaters.RoutineListAdapter;
 
 public class MainActivity extends AppCompatActivity {
     private String TAG = MainActivity.class.getSimpleName();

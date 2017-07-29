@@ -1,6 +1,6 @@
-package letshangllc.stretchingroutines.Data;
+package letshangllc.stretchingroutines.model.Data;
 
-import letshangllc.stretchingroutines.JavaObjects.Stretch;
+import letshangllc.stretchingroutines.model.JavaObjects.Stretch;
 import letshangllc.stretchingroutines.R;
 
 /**

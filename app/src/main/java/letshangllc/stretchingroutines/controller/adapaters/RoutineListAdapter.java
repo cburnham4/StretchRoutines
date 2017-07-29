@@ -1,4 +1,4 @@
-package letshangllc.stretchingroutines.adapaters;
+package letshangllc.stretchingroutines.controller.adapaters;
 
 
 import android.content.Context;
@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import letshangllc.stretchingroutines.JavaObjects.RoutineItem;
+import letshangllc.stretchingroutines.model.JavaObjects.RoutineItem;
 import letshangllc.stretchingroutines.R;
 
 /**

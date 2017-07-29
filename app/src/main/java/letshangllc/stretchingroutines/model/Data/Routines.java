@@ -1,11 +1,11 @@
-package letshangllc.stretchingroutines.Data;
+package letshangllc.stretchingroutines.model.Data;
 
 import android.content.Context;
 
 import java.util.ArrayList;
 
 import letshangllc.stretchingroutines.R;
-import letshangllc.stretchingroutines.JavaObjects.RoutineItem;
+import letshangllc.stretchingroutines.model.JavaObjects.RoutineItem;
 
 /**
  * Created by cvburnha on 4/12/2016.

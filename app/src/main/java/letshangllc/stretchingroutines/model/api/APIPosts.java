@@ -1,6 +1,5 @@
 package letshangllc.stretchingroutines.model.api;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.AnyRes;
@@ -15,14 +14,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.lang.reflect.Field;
-import java.net.URI;
+import letshangllc.stretchingroutines.model.JavaObjects.Stretch;
 
-import letshangllc.stretchingroutines.Data.Stretches;
-import letshangllc.stretchingroutines.R;
-import letshangllc.stretchingroutines.JavaObjects.Stretch;
-
-import static letshangllc.stretchingroutines.Data.Stretches.*;
+import static letshangllc.stretchingroutines.model.Data.Stretches.*;
 
 /**
  * Created by carlburnham on 7/28/17.
