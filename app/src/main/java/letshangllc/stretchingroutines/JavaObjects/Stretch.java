@@ -12,6 +12,7 @@ public class Stretch {
     private int duration;
     public Bitmap bitmap;
     public int id;
+    public String downloadURL;
 
     public Stretch(String name, String instructions, int duration, Bitmap bitmap, int id) {
         this.name = name;
