@@ -7,23 +7,21 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Locale;
 
 import letshangllc.stretchingroutines.AdsHelper;
 import letshangllc.stretchingroutines.model.Data.Routine;
-import letshangllc.stretchingroutines.model.Data.RoutineStretches;
 import letshangllc.stretchingroutines.model.JavaObjects.Stretch;
 import letshangllc.stretchingroutines.R;
 import letshangllc.stretchingroutines.model.api.APIRequests;
@@ -31,15 +29,15 @@ import letshangllc.stretchingroutines.model.api.APIRequests;
 public class StretchActivity extends AppCompatActivity {
     private static final String TAG = StretchActivity.class.getSimpleName();
 
-    private TextView tv_stretchName;
-    private TextView tv_instructions;
+    /* Views */
+    private TextView tv_stretchName, tv_instructions, tvStretchCount, tv_timer;
     private ImageView img_stretch;
-    private TextView tv_timer;
-    private int currentStretch;
+    private ProgressDialog progressDialog;
 
     private CountDownTimer countDownTimer;
+    private int currentStretchIndex;
+    private boolean isPaused;
 
-    private ProgressDialog progressDialog;
     /* Alarm */
     private Ringtone r;
 
@@ -55,7 +53,7 @@ public class StretchActivity extends AppCompatActivity {
         loadStretches(routine);
 
         this.findViews();
-        currentStretch = 0;
+        currentStretchIndex = 0;
 
 
 
@@ -81,28 +79,22 @@ public class StretchActivity extends AppCompatActivity {
         tv_instructions = (TextView) findViewById(R.id.tv_instructions);
         img_stretch = (ImageView) findViewById(R.id.img_stretchPhoto);
         tv_timer = (TextView) findViewById(R.id.tv_timer);
+        tvStretchCount = (TextView) findViewById(R.id.tvStretchCount);
     }
 
     private void startStretches(){
-        if(currentStretch >= stretches.size()){
+        if(currentStretchIndex >= stretches.size()){
             finish();
             return;
         }
-        Stretch stretch = stretches.get(currentStretch);
+        isPaused = false;
+        Stretch stretch = stretches.get(currentStretchIndex);
         tv_stretchName.setText(stretch.getName());
         tv_instructions.setText(stretch.getInstructions());
+        String stretchCount = (currentStretchIndex+1) + " / " +stretches.size();
+        tvStretchCount.setText(stretchCount);
 
         Glide.with(this).load(stretch.downloadURL).into(img_stretch);
-//        if(stretch.bitmap != null){
-//            img_stretch.setVisibility(View.VISIBLE);
-//            img_stretch.setImageBitmap(stretch.bitmap);
-//        }else if(stretch.getDrawableIndex() == 0){
-//            img_stretch.setVisibility(View.INVISIBLE);
-//        }else{
-//            img_stretch.setVisibility(View.VISIBLE);
-//            img_stretch.setImageDrawable(ContextCompat.getDrawable(this, stretch.getDrawableIndex()));
-//        }
-
 
         //tv_timer.setText(stretch.getDuration() +"");
         startSwitchCountdown(stretch.time*1000);
@@ -111,7 +103,7 @@ public class StretchActivity extends AppCompatActivity {
     /* TODO: Countdown to next exercise */
     public void nextExerciseOnClick(View view){
         countDownTimer.cancel();
-        currentStretch++;
+        currentStretchIndex++;
         startStretches();
     }
 
@@ -122,6 +114,7 @@ public class StretchActivity extends AppCompatActivity {
                 int time = (int) Math.round(Math.ceil(millisUntilFinished * 0.001f));
                 Log.i(TAG, String.format(Locale.getDefault(), "%d" , time));
                 tv_timer.setText(String.format(Locale.getDefault(), "%d" ,time));
+                StretchActivity.this.millisUntilFinished = millisUntilFinished;
             }
 
             public void onFinish() {
@@ -138,11 +131,12 @@ public class StretchActivity extends AppCompatActivity {
                 int time = Math.round(millisUntilFinished * 0.001f);
                 Log.i(TAG, String.format(Locale.getDefault(), "%d" ,time));
                 tv_timer.setText(String.format(Locale.getDefault(), "%d" ,time));
+                StretchActivity.this.millisUntilFinished = millisUntilFinished;
             }
 
             public void onFinish() {
                 playAlarm();
-                currentStretch++;
+                currentStretchIndex++;
                 startStretches();
 
             }
@@ -190,10 +184,31 @@ public class StretchActivity extends AppCompatActivity {
 
     }
 
+    private long millisUntilFinished = 0;
+    public void pauseExercise(View view){
+        Log.i(TAG, " Pause");
+        if(isPaused){
+            countDownTimer.start();
+            ((Button) view).setText("PAUSE");
+
+        }else{
+            if(countDownTimer!=null){
+                ((Button) view).setText("RESUME");
+                countDownTimer.cancel();
+
+            }
+
+        }
+        isPaused = !isPaused;
+    }
+
     @Override
     protected void onPause() {
         super.onPause();
-        countDownTimer.cancel();
+        if (countDownTimer != null){
+            countDownTimer.cancel();
+        }
+
         finish();
     }
 

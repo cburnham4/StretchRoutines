@@ -17,7 +17,7 @@
     <dimen name="stretch_top_margin">24dp</dimen>
     <dimen name="stretch_instructions_margin">10dp</dimen>
     <dimen name="stretch_img_margin">48dp</dimen>
-    <dimen name="stretch_timer_margin">16dp</dimen>
+    <dimen name="stretch_timer_margin">8dp</dimen>
 
     <dimen name="stretch_name_text_size">28sp</dimen>
     <dimen name="stretch_instruction_text_size">20sp</dimen>

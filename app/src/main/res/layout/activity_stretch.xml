@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="@dimen/stretch_top_margin"
-    tools:context=".activities.StretchActivity">
+    tools:context=".controller.Activities.StretchActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -37,13 +37,40 @@
         android:layout_above="@+id/ad_layout">
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/tvStretchCount"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:id="@+id/tv_timer"
-            android:layout_margin="@dimen/stretch_timer_margin"
-            android:textSize="@dimen/stretch_timer_text_size"
-            />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_margin="@dimen/stretch_instructions_margin"
+            android:textSize="20sp"
+            android:layout_centerVertical="true"/>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pause"
+                android:visibility="gone"
+                android:onClick="pauseExercise"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/tv_timer"
+                android:layout_margin="@dimen/stretch_timer_margin"
+                android:textSize="@dimen/stretch_timer_text_size"
+                />
+        </LinearLayout>
+
+
 
         <ImageButton
             android:layout_width="wrap_content"

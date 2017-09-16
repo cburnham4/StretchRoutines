@@ -80,7 +80,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        progressDialog.dismiss();
+
+        try{
+            progressDialog.dismiss();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
 

@@ -8,8 +8,8 @@ android {
         applicationId "letshangllc.stretchingroutines"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 13
-        versionName "1.7"
+        versionCode 15
+        versionName "2.0"
     }
     buildTypes {
         release {
@@ -18,6 +18,14 @@ android {
         }
     }
 }
+
+repositories {
+    maven {
+        url 'https://maven.google.com'
+        // Alternative URL is 'https://dl.google.com/dl/android/maven2/'
+    }
+}
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
