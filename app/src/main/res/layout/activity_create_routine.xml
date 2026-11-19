@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/btn_background_border"
                 android:text="@string/add_stretch"
-                android:onClick="addStretchOnClick"/>
+                android:id="@+id/btnAddStretch"/>
 
         </LinearLayout>
     </ScrollView>

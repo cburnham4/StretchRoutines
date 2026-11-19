@@ -11,7 +11,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import letshangllc.stretchingroutines.model.Data.Routine;
-import letshangllc.stretchingroutines.model.JavaObjects.RoutineItem;
 import letshangllc.stretchingroutines.model.JavaObjects.Stretch;
 
 /**
@@ -32,8 +31,6 @@ public class APIRequests {
     public static void getRoutines(final RoutineListener routineListener){
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("Routines");
-
-        final ArrayList<RoutineItem> routineItems = new ArrayList<>();
 
         ValueEventListener postListener = new ValueEventListener() {
             @Override

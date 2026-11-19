@@ -1,13 +1,19 @@
 package letshangllc.stretchingroutines;
 
-import android.app.Application;
-import android.test.ApplicationTestCase;
+import static org.junit.Assert.assertEquals;
+
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
- * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
+ * Placeholder instrumented test (replaces deprecated ApplicationTestCase).
  */
-public class ApplicationTest extends ApplicationTestCase<Application> {
-    public ApplicationTest() {
-        super(Application.class);
+@RunWith(AndroidJUnit4.class)
+public class ApplicationTest {
+    @Test
+    public void packageName_isCorrect() {
+        assertEquals("letshangllc.stretchingroutines", BuildConfig.APPLICATION_ID);
     }
 }
