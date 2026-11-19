@@ -89,9 +89,18 @@ Not directed at children under 13 (COPPA) or under 16 (GDPR).
 
 ---
 
+## AdMob IDs (production)
+
+| Resource | AdMob name | Value |
+|----------|------------|-------|
+| `admob_app_id` | Let's Stretch (Android) | `ca-app-pub-8223005482588566~7547587931` |
+| `admob_id_routines` | Banner ad Home | `ca-app-pub-8223005482588566/9024321135` |
+| `admob_id_stretches` | Banner Ad Stretches | `ca-app-pub-8223005482588566/1501054335` |
+
+Debug builds continue to use Google's official test IDs.
+
 ## Owner Follow-ups
 
 1. Complete Data safety in Play Console using this doc  
-2. Replace TODO AdMob App ID / unit IDs in `app/src/main/res/values/ad_config.xml` with real IDs under publisher `ca-app-pub-8223005482588566`  
-3. Confirm AdMob app Data safety / privacy disclosures match UMP + AdMob collection  
-4. Review whether Firebase Auth dependency can stay unused or should be removed later  
+2. Confirm AdMob app Data safety / privacy disclosures match UMP + AdMob collection  
+3. Review whether Firebase Auth dependency can stay unused or should be removed later  
