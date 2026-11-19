@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    PRODUCTION AdMob Configuration for Let's Stretch
+    Publisher ID: pub-8223005482588566
+    Package: letshangllc.stretchingroutines
+    AdMob app: "Let's Stretch" (Android)
+
+    Debug builds override these with Google's official test IDs via
+    app/src/debug/res/values/ad_config.xml.
+
+    Mapping (from AdMob console export):
+    =====================================
+    Resource              | AdMob unit name       | Screen
+    admob_app_id          | (App ID)              | APPLICATION_ID meta-data
+    admob_id_routines     | Banner ad Home        | MainActivity (routines list)
+    admob_id_stretches    | Banner Ad Stretches   | StretchActivity
+-->
+<resources>
+    <string name="admob_app_id">ca-app-pub-8223005482588566~7547587931</string>
+
+    <!-- MainActivity — Banner ad Home -->
+    <string name="admob_id_routines">ca-app-pub-8223005482588566/9024321135</string>
+
+    <!-- StretchActivity — Banner Ad Stretches -->
+    <string name="admob_id_stretches">ca-app-pub-8223005482588566/1501054335</string>
+</resources>

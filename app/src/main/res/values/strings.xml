@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Let\'s Stretch</string>
+
+    <string name="select_stretch_routine">Select Stretch Routine</string>
+    <string name="create_custom_routine">Create Custom Routine</string>
+    <string name="add_routine">Add Routine</string>
+    <string name="add_stretch">Add Stretch</string>
+    <string name="change_routine_photo">Change Routine Photo</string>
+    <string name="routine_name_hint">Routine Name</string>
+    <string name="stretch_name">Stretch Name</string>
+    <string name="description">Description</string>
+    <string name="duration">Duration</string>
+    <string name="seconds">seconds</string>
+    <string name="upload_photo">Upload Photo</string>
+    <string name="photo_uploaded">Photo Uploaded</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="add">ADD</string>
+    <string name="cancel">CANCEL</string>
+
+    <!-- Intent extras -->
+    <string name="routine_index_intent">ROUTINE_INDEX_INTENT</string>
+</resources>
